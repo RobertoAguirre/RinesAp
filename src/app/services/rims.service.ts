@@ -33,4 +33,7 @@ export class RimsService {
   public save(data) {
     return this.http.post(environment.SERVER_URL + '/rims', data);
   }
+  public getAll() {
+    return this.http.get(environment.SERVER_URL + '/rims');
+  }
 }

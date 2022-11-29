@@ -7,7 +7,7 @@ import { RimsService } from '../services/rims.service';
   templateUrl: './newrim.component.html',
   styleUrls: ['./newrim.component.css']
 })
-export class NewrimComponent {
+export class NewrimComponent  {
 
   constructor(private rim:RimsService){
 
