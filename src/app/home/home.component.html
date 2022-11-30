@@ -13,13 +13,18 @@
 </mat-toolbar>
 <section>
   <div class="parent">
-    <mat-card>
-      <mat-card-header>TOYOTA</mat-card-header>
-      <mat-card-content>Simple card</mat-card-content>
+    <mat-card *ngFor="let item of rims">
+      <mat-card-header>SKU:{{item.sku}}</mat-card-header>
+      <mat-card-content>
+        Modelo:{{item.modelname}}
+        Descripción:{{item.description}}
+        brand:{{item.brand}}
+        <img src="{{imagesUrl}}{{item.photo}}" class="img-responsive"/>
+      </mat-card-content>
 
     </mat-card>
 
-  </div>
+  </div> 
   <section>
 
 

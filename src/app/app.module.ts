@@ -19,13 +19,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NewrimComponent } from './newrim/newrim.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FileuploadComponent } from './components/fileupload/fileupload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ModalComponent,
-    NewrimComponent
+    NewrimComponent,
+    FileuploadComponent
   ],
   imports: [
     BrowserModule,
