@@ -20,6 +20,7 @@ import { NewrimComponent } from './newrim/newrim.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FileuploadComponent } from './components/fileupload/fileupload.component';
+import { NewbrandComponent } from './newbrand/newbrand.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FileuploadComponent } from './components/fileupload/fileupload.componen
     HomeComponent,
     ModalComponent,
     NewrimComponent,
-    FileuploadComponent
+    FileuploadComponent,
+    NewbrandComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,8 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../components/modal/modal.component';
 import { RimsService } from '../services/rims.service';
+import { BrandsService } from '../services/brands.service';
 import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-home',
@@ -10,22 +11,28 @@ import { environment } from '../../environments/environment';
 })
 export class HomeComponent implements OnInit {
   imagesUrl = environment.STATIC_FILES_URL;
-  public rims = [];
-  constructor(public dialog: MatDialog, private rim:RimsService) {
+  public brands = [];
+  constructor(public dialog: MatDialog, private brand: BrandsService) {
 
   }
   ngOnInit(): void {
-    
-    this.rim.getAll().subscribe((response) => {
+
+    this.brand.getAll().subscribe((response) => {
       let _response;
       _response = response;
-      this.rims = _response.results;
+      this.brands = _response.results;
       /* alert(_response.results[0].modelname); */
     })
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(ModalComponent);
+  openDialog(comp) {
+    const dialogRef = this.dialog.open(ModalComponent, {
+/*       width: '330px',
+      height: '400px', */
+      data: {
+        componentToShow: comp
+      }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

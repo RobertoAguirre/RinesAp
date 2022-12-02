@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit,Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -6,6 +7,19 @@ import { Component } from '@angular/core';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent {
+export class ModalComponent implements OnInit {
+  @Input() componentToShow: any;
+
+
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {componentToShow}) {
+    this.componentToShow = this.data.componentToShow;
+    
+  }
+
+  ngOnInit(): void {
+    console.log(this.componentToShow);
+  }
+
 
 }

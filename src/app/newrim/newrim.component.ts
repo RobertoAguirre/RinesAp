@@ -32,11 +32,7 @@ export class NewrimComponent  {
         
         this.file = file;
 
-        //formData.append("photo", file);
 
-        //const upload$ = this.http.post("/api/thumbnail-upload", formData);
-
-        //upload$.subscribe();
     }
 }
 

@@ -1,6 +1,7 @@
 <mat-card>
     <mat-dialog-content>
-        <app-newrim></app-newrim>
+        <app-newrim *ngIf="componentToShow=='rims'"></app-newrim>
+        <app-newbrand *ngIf="componentToShow=='brands'"></app-newbrand>
     </mat-dialog-content>
 
 </mat-card>
