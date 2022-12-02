@@ -3,18 +3,28 @@
 }
 
 .parent {
-    display: grid;
-    grid-template-columns: 30% 30% 30%;
-    grid-gap: 10px;
+    margin: 1em;
+    display: flex;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-gap: 1em;
     place-items: center;
+
 }
 
 .fabNewRim {
-    
+
     float: right;
     margin-right: 10%;
     vertical-align: bottom;
 
+}
+
+
+
+.imgincard {
+
+    width: 100%;
+    height: auto;
 }
 
 /* .parent {

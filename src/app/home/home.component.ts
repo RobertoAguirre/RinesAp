@@ -4,6 +4,7 @@ import { ModalComponent } from '../components/modal/modal.component';
 import { RimsService } from '../services/rims.service';
 import { BrandsService } from '../services/brands.service';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,7 +13,7 @@ import { environment } from '../../environments/environment';
 export class HomeComponent implements OnInit {
   imagesUrl = environment.STATIC_FILES_URL;
   public brands = [];
-  constructor(public dialog: MatDialog, private brand: BrandsService) {
+  constructor(public dialog: MatDialog, private brand: BrandsService, private router: Router) {
 
   }
   ngOnInit(): void {
@@ -25,10 +26,20 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  goToRims(brand) {
+    this.router.navigate(['/rims'], {
+      state: {
+        data: {
+          brand: brand
+        }
+      }
+    });
+  }
+
   openDialog(comp) {
     const dialogRef = this.dialog.open(ModalComponent, {
-/*       width: '330px',
-      height: '400px', */
+      /*       width: '330px',
+            height: '400px', */
       data: {
         componentToShow: comp
       }

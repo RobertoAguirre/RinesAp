@@ -1,0 +1,18 @@
+.imgincard{
+    width: 22em;
+    height: 20em;
+    
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+
+.fabNewRim {
+
+    float: right;
+    margin-right: 10%;
+    vertical-align: bottom;
+
+}

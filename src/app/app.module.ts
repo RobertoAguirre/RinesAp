@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
-
+import { MatSelectModule } from '@angular/material/select';
 
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './components/modal/modal.component';
@@ -21,6 +21,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FileuploadComponent } from './components/fileupload/fileupload.component';
 import { NewbrandComponent } from './newbrand/newbrand.component';
+import { RimsComponent } from './rims/rims.component';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { NewbrandComponent } from './newbrand/newbrand.component';
     ModalComponent,
     NewrimComponent,
     FileuploadComponent,
-    NewbrandComponent
+    NewbrandComponent,
+    RimsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import { NewbrandComponent } from './newbrand/newbrand.component';
     MatGridListModule,
     MatCardModule,
     MatDialogModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule
   ],

@@ -1,17 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { RimsService } from '../services/rims.service';
+import { BrandsService } from '../services/brands.service';
 
 @Component({
   selector: 'app-newrim',
   templateUrl: './newrim.component.html',
   styleUrls: ['./newrim.component.css']
 })
-export class NewrimComponent  {
+export class NewrimComponent implements OnInit  {
   fileName = '';
   file;
-  constructor(private rim:RimsService){
+  brands = [];
+  constructor(private rim:RimsService,private brand:BrandsService){
 
+  }
+  ngOnInit(): void {
+
+    this.brand.getAll().subscribe((response) => {
+      let _response;
+      _response = response;
+      this.brands = _response.results;
+      /* alert(_response.results[0].modelname); */
+    })
   }
 
   newrimForm = new FormGroup({
