@@ -37,7 +37,7 @@ export class NewbrandComponent {
   onSubmit() {
     //let data = this.newrimForm.value;
     const formData = new FormData();
-    formData.append("brand",this.newbrandForm.value['sku']);
+    formData.append("brand",this.newbrandForm.value['brand']);
     formData.append("brandlogo",this.file);
 
     this.brand.save(formData).subscribe((response) => {

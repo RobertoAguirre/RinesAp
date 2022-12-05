@@ -1,18 +1,35 @@
-.imgincard{
-    width: 22em;
-    height: 20em;
-    
-}
-
-.example-spacer {
+/* .example-spacer {
     flex: 1 1 auto;
 }
+ */
+.parent {}
 
+mat-card {
+    height: 22em;
+    width: 22em;
+    margin: 1em;
+    display: inline-block;
 
-.fabNewRim {
+}
+
+/* .fabNewRim {
 
     float: right;
     margin-right: 10%;
     vertical-align: bottom;
 
+} */
+
+
+
+.imgincard {
+
+    width: 5em;
+    height: 5em;
 }
+
+/* .parent {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+} */

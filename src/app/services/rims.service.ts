@@ -29,6 +29,7 @@ export class RimsService {
     }
 
   }
+  
 
   public save(data) {
     return this.http.post(environment.SERVER_URL + '/rims', data);
@@ -36,4 +37,8 @@ export class RimsService {
   public getAll() {
     return this.http.get(environment.SERVER_URL + '/rims');
   }
+  public delete(data) {
+    return this.http.delete(`${environment.SERVER_URL}/rims/${data.sku}` );
+  }
+
 }
