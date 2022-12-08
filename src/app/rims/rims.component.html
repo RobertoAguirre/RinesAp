@@ -8,101 +8,86 @@
     </div>
 
     <div class="parent">
-        <div hidden id="print-section">
-            <table border="1">
+        <div id="print-section">
+            <table border="1"
+                style="margin-left: 3em; font-size: x-large; line-height: .9; font-family: Arial, Helvetica, monospace, sans-serif;">
                 <tr>
-                    <td colspan="2">
-                        <H2>PART CUST</H2>
+                    <td colspan="2" style="overflow: auto;width: 1300px; vertical-align:top;">
+
+                        PART CUST
+                        <div style="margin-top: -1.5em;">
+                            <P style="font-size: 285%;">427003W0-A740 M2</P>
+                            <br />
+                        </div>
+
+ 
+                        <div style="margin-top: -3em;">
+                            <ngx-barcode6 [bc-height]="70" [bc-format]="'MSI'" [bc-value]="'12345678901231'"
+                                [bc-display-value]="false">
+                            </ngx-barcode6>
+                        </div>
+
+
+
                     </td>
-                    <td>
-                        <H2>427003W0-A740 M2</H2>
-                    </td>
-                    <td rowspan="2" style="word-wrap: break-word;">
-                        <H2>SHIP FROM MAXION WHEELS DE MEX</H2><br>
-                        <H2>AVENIDA INDUSTRIAL</H2>
-                        <H2>CHIUAHUA, RF</H2>
+                    <td colspan="2" style="vertical-align:top; word-wrap: break-word;">
+                        SHIP FROM MAXION WHEELS DE MEX<br>
+                        AVENIDA INDUSTRIAL<br>
+                        CHIHUAHUA, RF
                     </td>
                 </tr>
                 <tr>
-                    <TD  colspan="3">
-                        <ngx-barcode6 [bc-format]="'MSI'" [bc-value]="'12345678901231'" [bc-display-value]="false">
+                    <td style="vertical-align:top;" colspan="2">
+                        QTY (Q) 25
+                        <ngx-barcode6 [bc-format]="'MSI'" [bc-value]="'25'" [bc-display-value]="false">
                         </ngx-barcode6>
+                    </td>
+                    <td style="vertical-align:top;" colspan="2">
+                        PART NUMBER DESCRIPTION<br />
+                        8750 22 M H <br />
+                        RV17" ACAB FP
+
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:top;">
+                        PART #
+                        <br />
+                        SUPL (V)
+
+                        <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="'8750S'" [bc-display-value]="false">
+                        </ngx-barcode6>
+                    </td>
+
+                    <td style="vertical-align:top;">
+                        CHANGE <br />LETTER
+                    </td>
+                    <TD>
+
+                    </TD>
+                    <TD style="vertical-align:top;">
+                        DATE MFG<br /> 11/18/22
                     </TD>
 
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        <H2>QTY (Q) 25</H2>
-                    </td>
-                    <td colspan="2">
-                        <H2>PART NUMBER DESCRIPTION</H2><br />
-                        <H2>HND 875022</H2>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <ngx-barcode6 [bc-format]="'MSI'" [bc-value]="'25'" [bc-display-value]="false">
-                        </ngx-barcode6>
-                    </td>
-                    <td colspan="2">
-                        <H2> 8750 22 M H</H2> <br />
-                        <H2>RV17" ACAB FP</H2>
-                    </td>
 
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        <H2> PART #
-                            <br />
-                            SUPL (V)
-                        </H2>
-                    </td>
-                    <td colspan="2">
-                        <H2>
-                            8750SA</H2>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="'8750S'" [bc-display-value]="false">
-                        </ngx-barcode6>
-                    </td>
-                    <td></td>
+                    <td style="vertical-align:top;" colspan="2">
 
-                </tr>
-                <tr>
-                    <td>
-                        <H2>
-                            SERIAL # <br />
-                            (3S) 19227086
-                        </H2>
-                    </td>
-                    <td>
-                        <H2>
-                            CHANGE <br /> LETTER
-                        </H2>
-                    </td>
-                    <td>
+                        SERIAL # <br />
+                        (3S) 19227086
 
-                    </td>
-                    <td>
-                        <H2>
-                            DATE <br />
-                            11/18/22
-                        </H2>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
                         <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="'19227086'" [bc-display-value]="false">
                         </ngx-barcode6>
                     </td>
-                    <td>
-                        <H2>DOCK <BR />LOC</H2>
+
+                    <td style="vertical-align:top;">
+                        DOCK <BR />LOC
                     </td>
-                    <td colspan="2">
-                        <H2>DROP <BR />ZONE</H2>
+                    <td style="vertical-align:top;">
+                        DROP <BR />ZONE
                     </td>
                 </tr>
             </table>
