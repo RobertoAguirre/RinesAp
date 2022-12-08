@@ -47,6 +47,8 @@ export class RimsComponent implements OnInit {
     
   }
 
+  printHere(){}
+
   openDialog(comp) {
     const dialogRef = this.dialog.open(ModalComponent, {
       /*       width: '330px',

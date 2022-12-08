@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPrintModule } from 'ngx-print';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +15,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 
+import { NgxBarcode6Module } from 'ngx-barcode6';
+
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -22,6 +26,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FileuploadComponent } from './components/fileupload/fileupload.component';
 import { NewbrandComponent } from './newbrand/newbrand.component';
 import { RimsComponent } from './rims/rims.component';
+import { GreenprintComponent } from './components/greenprint/greenprint.component';
 
 
 @NgModule({
@@ -32,13 +37,16 @@ import { RimsComponent } from './rims/rims.component';
     NewrimComponent,
     FileuploadComponent,
     NewbrandComponent,
-    RimsComponent
+    RimsComponent,
+    GreenprintComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxPrintModule,
+    NgxBarcode6Module,
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,

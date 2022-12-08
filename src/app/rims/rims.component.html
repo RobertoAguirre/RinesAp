@@ -8,6 +8,107 @@
     </div>
 
     <div class="parent">
+        <div hidden id="print-section">
+            <table border="1">
+                <tr>
+                    <td colspan="2">
+                        <H2>PART CUST</H2>
+                    </td>
+                    <td>
+                        <H2>427003W0-A740 M2</H2>
+                    </td>
+                    <td rowspan="2" style="word-wrap: break-word;">
+                        <H2>SHIP FROM MAXION WHEELS DE MEX</H2><br>
+                        <H2>AVENIDA INDUSTRIAL</H2>
+                        <H2>CHIUAHUA, RF</H2>
+                    </td>
+                </tr>
+                <tr>
+                    <TD  colspan="3">
+                        <ngx-barcode6 [bc-format]="'MSI'" [bc-value]="'12345678901231'" [bc-display-value]="false">
+                        </ngx-barcode6>
+                    </TD>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <H2>QTY (Q) 25</H2>
+                    </td>
+                    <td colspan="2">
+                        <H2>PART NUMBER DESCRIPTION</H2><br />
+                        <H2>HND 875022</H2>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <ngx-barcode6 [bc-format]="'MSI'" [bc-value]="'25'" [bc-display-value]="false">
+                        </ngx-barcode6>
+                    </td>
+                    <td colspan="2">
+                        <H2> 8750 22 M H</H2> <br />
+                        <H2>RV17" ACAB FP</H2>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <H2> PART #
+                            <br />
+                            SUPL (V)
+                        </H2>
+                    </td>
+                    <td colspan="2">
+                        <H2>
+                            8750SA</H2>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="'8750S'" [bc-display-value]="false">
+                        </ngx-barcode6>
+                    </td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <H2>
+                            SERIAL # <br />
+                            (3S) 19227086
+                        </H2>
+                    </td>
+                    <td>
+                        <H2>
+                            CHANGE <br /> LETTER
+                        </H2>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <H2>
+                            DATE <br />
+                            11/18/22
+                        </H2>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="'19227086'" [bc-display-value]="false">
+                        </ngx-barcode6>
+                    </td>
+                    <td>
+                        <H2>DOCK <BR />LOC</H2>
+                    </td>
+                    <td colspan="2">
+                        <H2>DROP <BR />ZONE</H2>
+                    </td>
+                </tr>
+            </table>
+
+            <!--Your html stuff that you want to print-->
+        </div>
         <mat-card-content>
 
             <mat-card *ngFor="let item of rims">
@@ -29,7 +130,25 @@
                     <img src="{{imagesUrl}}/rims/{{item.photo}}" class="imgincard" />
                 </mat-card-content>
                 <mat-card-actions>
-                    <mat-icon (click)="deleteRim(item)" color="warn"  style="margin-left: 11em;">delete</mat-icon>
+                    <div>
+                        <!--                        <button mat-raised-button (click)="openDialog('greenprint')" color="accent" aria-label="Icon button for new rim">
+                            <mat-icon>print</mat-icon>
+                            Imprimir
+                        </button> -->
+                        <button mat-raised-button color="accent" aria-label="Icon button for new rim"
+                            printSectionId="print-section" ngxPrint>
+                            <mat-icon>print</mat-icon>
+                            Imprimir
+                        </button>
+                    </div>
+                    <div>
+                        <button mat-raised-button (click)="deleteRim(item)" color="accent"
+                            aria-label="Boton para eliminar modelo">
+                            <mat-icon>delete</mat-icon>
+                            Eliminar
+                        </button>
+                    </div>
+
                 </mat-card-actions>
 
             </mat-card>
