@@ -33,3 +33,11 @@ mat-card {
     flex-flow: row wrap;
     justify-content: space-around;
 } */
+@media print {
+    @page {
+        size: auto;
+        margin: 0;
+    }
+
+
+}
