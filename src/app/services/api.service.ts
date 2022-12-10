@@ -8,14 +8,14 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  httpOptions = {
+/*   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': ''
     })
-  }
+  } */
 
-  public pruebaGetProtegido(tkn) {
+/*   public pruebaGetProtegido(tkn) {
 
 
     this.httpOptions.headers = this.httpOptions.headers.set('access-token', 'Bearer ' + tkn);
@@ -27,7 +27,7 @@ export class ApiService {
       return ex;
     }
 
-  }
+  } */
 
   public ejecuta(data) {
     return this.http.post(environment.SERVER_URL + 'EjecutaConsulta/', data);

@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
       _response = response;
       
       if (_response.username) {
+        localStorage.setItem('token',_response.token)
         localStorage.setItem('authenticated', 'true');
         localStorage.setItem('id', _response._id);
         localStorage.setItem('role', _response.role);

@@ -8,27 +8,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': ''
-    })
-  }
-
-  //jwt example
-  public pruebaGetProtegido(tkn) {
-
-
-    this.httpOptions.headers = this.httpOptions.headers.set('access-token', 'Bearer ' + tkn);
-
-    try {
-      return this.http.get(environment.SERVER_URL + 'pruebagetProtegida', this.httpOptions);
-    } catch (ex) {
-      console.log(ex);
-      return ex;
-    }
-
-  }
 
 
   public authenticate(data) {

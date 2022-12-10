@@ -16,6 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginComponent } from './login/login.component';
 
+import { AuthInterceptor } from '../interceptors/auth.interceptor';
+
 @NgModule({
   declarations: [
     LoginComponent
