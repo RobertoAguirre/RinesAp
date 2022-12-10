@@ -28,6 +28,7 @@ import { NewbrandComponent } from './newbrand/newbrand.component';
 import { RimsComponent } from './rims/rims.component';
 import { GreenprintComponent } from './components/greenprint/greenprint.component';
 
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [

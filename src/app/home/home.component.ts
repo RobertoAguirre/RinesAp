@@ -50,4 +50,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  logout() {
+    localStorage.clear();
+    this.router.navigateByUrl('/login');
+  }
+
 }

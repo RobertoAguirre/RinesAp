@@ -27,7 +27,7 @@ export class RimsComponent implements OnInit {
 
   }
 
-  getRimsByBrand(){
+  getRimsByBrand() {
     this.rim.getAll().subscribe((response) => {
       let _response;
       _response = response;
@@ -36,18 +36,18 @@ export class RimsComponent implements OnInit {
     })
   }
 
-  deleteRim(rim){
-    this.rim.delete(rim).subscribe((response)=>{
+  deleteRim(rim) {
+    this.rim.delete(rim).subscribe((response) => {
       let _response;
       _response = response;
       Swal.fire('Modelo eliminado!', 'xx', 'success')
       this.getRimsByBrand();
 
     })
-    
+
   }
 
-  printHere(){}
+  printHere() { }
 
   openDialog(comp) {
     const dialogRef = this.dialog.open(ModalComponent, {
@@ -63,5 +63,9 @@ export class RimsComponent implements OnInit {
     });
   }
 
+  logout() {
+    localStorage.clear();
+    this.router.navigateByUrl('/login');
+  }
 
 }
