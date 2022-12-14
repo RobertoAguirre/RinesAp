@@ -41,8 +41,8 @@ mat-card {
 } */
 @media print {
     @page {
-        size: auto;
-        margin: 0;
+        size: landscape;
+        margin: -0;
     }
 
 

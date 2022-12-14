@@ -46,8 +46,9 @@
                     <br>
 
                     <!-- boton escondido para ngxprint -->
-                    <button #printbtn style="display: none; margin-left:2em;" color="accent" aria-label="Icon button for new rim"
-                        printSectionId="print-section" printTitle="etiqueta" ngxPrint>
+                    <button #printbtn style="display: none; margin-left:2em;" color="accent"
+                        aria-label="Icon button for new rim" printSectionId="print-section" printTitle="etiqueta"
+                        ngxPrint>
                         <mat-icon>print</mat-icon>
                         Imprimir
                     </button>
@@ -74,17 +75,17 @@
         <table border="1"
             style="margin-left: 3em; font-size: x-large; line-height: .9; font-family: Arial, Helvetica, monospace, sans-serif;">
             <tr>
-                <td colspan="2" style="overflow: auto;width: 1300px; vertical-align:top;">
+                <td colspan="2" style="overflow: auto;width: 1500px; vertical-align:top;">
 
                     PART CUST
                     <div style="margin-top: -1.5em;">
-                        <P style="font-size: 285%;">{{printSKU}}</P>
+                        <P style="font-size: 250%;">{{printSKU}}</P>
                         <br />
                     </div>
 
 
-                    <div style="margin-top: -3em;">
-                        <ngx-barcode6 [bc-height]="70" [bc-format]="'CODE128'" [bc-value]="printSKU"
+                    <div style="margin-top: -15%;">
+                        <ngx-barcode6 [bc-height]="65" [bc-format]="'CODE128'" [bc-value]="printSKU"
                             [bc-display-value]="false">
                         </ngx-barcode6>
                     </div>
@@ -100,26 +101,38 @@
             </tr>
             <tr>
                 <td style="vertical-align:top;" colspan="2">
-                    QTY (Q) {{printqty}}
-                    <ngx-barcode6 [bc-height]="70" [bc-element-type]="'svg'" [bc-format]="'MSI'" [bc-value]="printqty"
-                        [bc-display-value]="false">
-                    </ngx-barcode6>
+
+                    <label style="font-size: 100%;"> QTY (Q) #</label>
+                    <label style="display: inline; font-size: 250%; margin-top: -5%;">
+                        {{printqty}}
+                    </label>
+                    <div>
+                        <ngx-barcode6 [bc-height]="65" [bc-element-type]="'svg'" [bc-format]="'CODE128'"
+                            [bc-value]="printqty" [bc-display-value]="false">
+                        </ngx-barcode6>
+                    </div>
+
                 </td>
                 <td style="vertical-align:top;" colspan="2">
-                    PART NUMBER DESCRIPTION<br />
-                    {{printdescription}}
+                    <p style="font-size: 100%;"> PART NUMBER DESCRIPTION</p>
+                    <p style="font-size: 150%; margin-top: -5%;">
+                        {{printdescription}}
+                    </p>
 
                 </td>
             </tr>
             <tr>
                 <td style="vertical-align:top;">
-                    PART #
-                    <br />
-                    SUPL (V)
+                    <p style="font-size: 100%;"> PART SUPL (V) #</p>
+                    <p style="font-size: 250%; margin-top: -7%;">
+                        {{printpartsupl}}
+                    </p>
+                    <div style="margin-top: -2.5em;">
+                        <ngx-barcode6 [bc-height]="65" [bc-format]="'CODE128'" [bc-value]="printpartsupl"
+                            [bc-display-value]="false">
+                        </ngx-barcode6>
+                    </div>
 
-                    <ngx-barcode6 [bc-height]="70" [bc-format]="'CODE128'" [bc-value]="printpartsupl"
-                        [bc-display-value]="false">
-                    </ngx-barcode6>
                 </td>
 
                 <td style="vertical-align:top;">
@@ -139,12 +152,18 @@
             <tr>
                 <td style="vertical-align:top;" colspan="2">
 
-                    SERIAL # <br />
-                    (3S) {{printserial}}
+                    <p style="font-size: 100%;"> SERIAL # (3S) </p>
+                    <p style="font-size: 250%; margin-top: -5%; ">
+                        {{printserial}}
+                    </p>
+ 
+                    <div style="margin-top: -10%;">
+                        <ngx-barcode6 [bc-height]="65" [bc-format]="'CODE128'" [bc-value]="printserial"
+                            [bc-display-value]="false">
+                        </ngx-barcode6>
+                    </div>
 
-                    <ngx-barcode6 [bc-height]="70" [bc-format]="'CODE128'" [bc-value]="printserial"
-                        [bc-display-value]="true">
-                    </ngx-barcode6>
+
                 </td>
 
                 <td style="vertical-align:top;">
