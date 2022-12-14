@@ -14,6 +14,10 @@ import Swal from 'sweetalert2';
 export class RimsComponent implements OnInit {
 
 
+  id;
+  role;
+  username;
+  admin;
 
 
   imagesUrl = environment.STATIC_FILES_URL;
@@ -44,10 +48,22 @@ export class RimsComponent implements OnInit {
   ngOnInit(): void {
 
     this.currentBrand = localStorage.getItem('currentBrand');
+    this.getStoredVariables();
     this.getRimsByBrand();
 
 
 
+  }
+
+  getStoredVariables() {
+    this.id = localStorage.getItem('id');
+    this.role = localStorage.getItem('role');
+    this.username = localStorage.getItem('username');
+    if (this.role === 'admin') {
+      this.admin = true;
+    } else {
+      this.admin = false;
+    }
   }
 
   triggerPrint(item) {

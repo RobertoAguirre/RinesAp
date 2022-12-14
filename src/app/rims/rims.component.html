@@ -10,7 +10,7 @@
 </mat-toolbar>
 <section>
 
-    <div style="margin-left: 2em; margin-top:1em;">
+    <div *ngIf="admin" style="margin-left: 2em; margin-top:1em;">
         <button mat-raised-button (click)="openDialog('rims')" color="accent" aria-label="Icon button for new rim">
             <mat-icon>add</mat-icon>
             Nuevo modelo {{currentBrand}}
@@ -57,7 +57,7 @@
                         [useExistingCss]="true"></button> -->
                 </div>
                 <div style="margin-left:3em;">
-                    <button (click)="deleteRim(item)" mat-raised-button>
+                    <button *ngIf="admin" (click)="deleteRim(item)" mat-raised-button>
                         Eliminar
                         <mat-icon color="warn">delete</mat-icon>
                     </button>
