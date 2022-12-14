@@ -1,117 +1,29 @@
 <mat-toolbar color="primary">
     <button mat-icon-button fontIcon="home" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
+        <mat-icon>menu</mat-icon>
     </button>
     <span>Impresión de etiquetas</span>
     <span class="example-spacer"></span>
     <button (click)="logout()" mat-icon-button aria-label="logout button icon-button with logout icon">
-      <mat-icon>logout</mat-icon>
+        <mat-icon>logout</mat-icon>
     </button>
-  </mat-toolbar>
+</mat-toolbar>
 <section>
 
     <div style="margin-left: 2em; margin-top:1em;">
         <button mat-raised-button (click)="openDialog('rims')" color="accent" aria-label="Icon button for new rim">
             <mat-icon>add</mat-icon>
-            Nuevo modelo
+            Nuevo modelo {{currentBrand}}
         </button>
     </div>
 
-    <div class="parent">
-        <div hidden id="print-section">
-            <table border="1"
-                style="margin-left: 3em; font-size: x-large; line-height: .9; font-family: Arial, Helvetica, monospace, sans-serif;">
-                <tr>
-                    <td colspan="2" style="overflow: auto;width: 1300px; vertical-align:top;">
-
-                        PART CUST
-                        <div style="margin-top: -1.5em;">
-                            <P style="font-size: 285%;">427003W0-A740 M2</P>
-                            <br />
-                        </div>
-
- 
-                        <div style="margin-top: -3em;">
-                            <ngx-barcode6 [bc-height]="70" [bc-format]="'MSI'" [bc-value]="'12345678901231'"
-                                [bc-display-value]="false">
-                            </ngx-barcode6>
-                        </div>
-
-
-
-                    </td>
-                    <td colspan="2" style="vertical-align:top; word-wrap: break-word;">
-                        SHIP FROM MAXION WHEELS DE MEX<br>
-                        AVENIDA INDUSTRIAL<br>
-                        CHIHUAHUA, RF
-                    </td>
-                </tr>
-                <tr>
-                    <td style="vertical-align:top;" colspan="2">
-                        QTY (Q) 25
-                        <ngx-barcode6 [bc-format]="'MSI'" [bc-value]="'25'" [bc-display-value]="false">
-                        </ngx-barcode6>
-                    </td>
-                    <td style="vertical-align:top;" colspan="2">
-                        PART NUMBER DESCRIPTION<br />
-                        8750 22 M H <br />
-                        RV17" ACAB FP
-
-                    </td>
-                </tr>
-                <tr>
-                    <td style="vertical-align:top;">
-                        PART #
-                        <br />
-                        SUPL (V)
-
-                        <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="'8750S'" [bc-display-value]="false">
-                        </ngx-barcode6>
-                    </td>
-
-                    <td style="vertical-align:top;">
-                        CHANGE <br />LETTER
-                    </td>
-                    <TD>
-
-                    </TD>
-                    <TD style="vertical-align:top;">
-                        DATE MFG<br /> 11/18/22
-                    </TD>
-
-                </tr>
-                <tr>
-
-                </tr>
-                <tr>
-                    <td style="vertical-align:top;" colspan="2">
-
-                        SERIAL # <br />
-                        (3S) 19227086
-
-                        <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="'19227086'" [bc-display-value]="false">
-                        </ngx-barcode6>
-                    </td>
-
-                    <td style="vertical-align:top;">
-                        DOCK <BR />LOC
-                    </td>
-                    <td style="vertical-align:top;">
-                        DROP <BR />ZONE
-                    </td>
-                </tr>
-            </table>
-
-            <!--Your html stuff that you want to print-->
-        </div>
-        <mat-card-content>
-
-            <mat-card *ngFor="let item of rims">
-                <mat-card-header>
-                    <h2>{{item.sku}}</h2>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>
+    <div class="parent" *ngIf="rims">
+        <mat-card *ngFor="let item of rims">
+            <mat-card-header>
+                <h2>{{item.sku}}</h2>
+            </mat-card-header>
+            <mat-card-content>
+                <!--                     <p>
                         Modelo:{{item.modelname}}
                     </p>
                     <p>
@@ -119,37 +31,132 @@
                     </p>
                     <p>
                         brand:{{item.brand}}
-                    </p>
+                    </p> -->
+                <!--   <br /> -->
+
+                <img src="{{imagesUrl}}/rims/{{item.photo}}" class="imgincard" />
+            </mat-card-content>
+            <mat-card-actions>
+                <div>
+                    <!--  <button  [print]="['print-section']">otro Print element</button> -->
+
+
+                    <button mat-raised-button color="accent" (click)="triggerPrint(item)"> <mat-icon>print</mat-icon>
+                        Imprimir</button>
+                    <br>
+
+                    <!-- boton escondido para ngxprint -->
+                    <button #printbtn style="display: none; margin-left:2em;" color="accent" aria-label="Icon button for new rim"
+                        printSectionId="print-section" printTitle="etiqueta" ngxPrint>
+                        <mat-icon>print</mat-icon>
+                        Imprimir
+                    </button>
+
+                    <!--    <button #print printTitle="report" printSectionId="content-section" ngxPrint hidden="true"
+                        [useExistingCss]="true"></button> -->
+                </div>
+                <div style="margin-left:3em;">
+                    <button (click)="deleteRim(item)" mat-raised-button>
+                        Eliminar
+                        <mat-icon color="warn">delete</mat-icon>
+                    </button>
+                </div>
+
+            </mat-card-actions>
+
+        </mat-card>
+
+
+
+    </div>
+
+    <div id="print-section">
+        <table border="1"
+            style="margin-left: 3em; font-size: x-large; line-height: .9; font-family: Arial, Helvetica, monospace, sans-serif;">
+            <tr>
+                <td colspan="2" style="overflow: auto;width: 1300px; vertical-align:top;">
+
+                    PART CUST
+                    <div style="margin-top: -1.5em;">
+                        <P style="font-size: 285%;">{{printSKU}}</P>
+                        <br />
+                    </div>
+
+
+                    <div style="margin-top: -3em;">
+                        <ngx-barcode6 [bc-height]="70" [bc-format]="'CODE128'" [bc-value]="printSKU"
+                            [bc-display-value]="false">
+                        </ngx-barcode6>
+                    </div>
+
+
+
+                </td>
+                <td colspan="2" style="vertical-align:top; word-wrap: break-word;">
+                    SHIP FROM MAXION WHEELS DE MEX<br>
+                    AVENIDA INDUSTRIAL<br>
+                    CHIHUAHUA, RF
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align:top;" colspan="2">
+                    QTY (Q) {{printqty}}
+                    <ngx-barcode6 [bc-height]="70" [bc-element-type]="'svg'" [bc-format]="'MSI'" [bc-value]="printqty"
+                        [bc-display-value]="false">
+                    </ngx-barcode6>
+                </td>
+                <td style="vertical-align:top;" colspan="2">
+                    PART NUMBER DESCRIPTION<br />
+                    {{printdescription}}
+
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align:top;">
+                    PART #
                     <br />
+                    SUPL (V)
 
-                    <img src="{{imagesUrl}}/rims/{{item.photo}}" class="imgincard" />
-                </mat-card-content>
-                <mat-card-actions>
-                    <div>
-                        <!--                        <button mat-raised-button (click)="openDialog('greenprint')" color="accent" aria-label="Icon button for new rim">
-                            <mat-icon>print</mat-icon>
-                            Imprimir
-                        </button> -->
-                        <button mat-raised-button color="accent" aria-label="Icon button for new rim"
-                            printSectionId="print-section" printTitle="etiqueta" ngxPrint>
-                            <mat-icon>print</mat-icon>
-                            Imprimir
-                        </button>
-                    </div>
-                    <div>
-                        <button mat-raised-button (click)="deleteRim(item)" color="accent"
-                            aria-label="Boton para eliminar modelo">
-                            <mat-icon>delete</mat-icon>
-                            Eliminar
-                        </button>
-                    </div>
+                    <ngx-barcode6 [bc-height]="70" [bc-format]="'CODE128'" [bc-value]="printpartsupl"
+                        [bc-display-value]="false">
+                    </ngx-barcode6>
+                </td>
 
-                </mat-card-actions>
+                <td style="vertical-align:top;">
+                    CHANGE <br />LETTER
+                </td>
+                <TD>
 
-            </mat-card>
+                </TD>
+                <TD style="vertical-align:top;">
+                    DATE MFG<br /> {{printdatemfg}}
+                </TD>
 
-        </mat-card-content>
+            </tr>
+            <tr>
 
+            </tr>
+            <tr>
+                <td style="vertical-align:top;" colspan="2">
+
+                    SERIAL # <br />
+                    (3S) {{printserial}}
+
+                    <ngx-barcode6 [bc-height]="70" [bc-format]="'CODE128'" [bc-value]="printserial"
+                        [bc-display-value]="true">
+                    </ngx-barcode6>
+                </td>
+
+                <td style="vertical-align:top;">
+                    DOCK <BR />LOC
+                </td>
+                <td style="vertical-align:top;">
+                    DROP <BR />ZONE
+                </td>
+            </tr>
+        </table>
+
+        <!--Your html stuff that you want to print-->
     </div>
 
 

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormControl } from '@angular/forms';
 import { RimsService } from '../services/rims.service';
 import { BrandsService } from '../services/brands.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-newrim',
@@ -37,7 +39,7 @@ export class NewrimComponent implements OnInit  {
   });
   
 
-  constructor(private rim:RimsService,private brand:BrandsService){
+  constructor(public dialog: MatDialog,private rim:RimsService,private brand:BrandsService){
     //this.currentBrand = localStorage.getItem('currentBrand');
   }
 
@@ -71,16 +73,26 @@ export class NewrimComponent implements OnInit  {
   onSubmit() {
     //let data = this.newrimForm.value;
     const formData = new FormData();
-    formData.append("sku",this.newrimForm.value['sku']);
-    formData.append("modelname",this.newrimForm.value['modelname']);
-    formData.append("description",this.newrimForm.value['description']);
-    formData.append("brand",this.newrimForm.value['brand']);
+    formData.append("sku",this.newrimForm.value['sku'].toUpperCase());
+    formData.append("modelname",this.newrimForm.value['modelname'].toUpperCase());
+    formData.append("description",this.newrimForm.value['description'].toUpperCase());
+    formData.append("partsupl",this.newrimForm.value['partsupl'].toUpperCase());
+    formData.append("serial",this.newrimForm.value['serial'].toUpperCase());
+    formData.append("datemfg",this.newrimForm.value['datemfg']);
+    formData.append("qty",this.newrimForm.value['qty']);
+    formData.append("brand",this.newrimForm.value['brand'].toUpperCase());
     formData.append("photo",this.file);
 
     this.rim.save(formData).subscribe((response) => {
       let _response;
       _response = response;
-      alert(response);
+      Swal.fire(
+        '¡Guardado!',
+        'La marca se guardó correctamente',
+        'success'
+      );
+      //Swal.close();
+      this.dialog.closeAll();
     })
   }
 

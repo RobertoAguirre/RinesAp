@@ -2,11 +2,17 @@
     flex: 1 1 auto;
 }
  */
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
 .parent {}
 
 mat-card {
-    height: 22em;
-    width: 22em;
+    text-align: center;
+    height: 25em;
+    width: 25em;
     margin: 1em;
     display: inline-block;
 
@@ -24,8 +30,8 @@ mat-card {
 
 .imgincard {
 
-    width: 5em;
-    height: 5em;
+    width: 15em;
+    height: 15em;
 }
 
 /* .parent {
@@ -41,3 +47,4 @@ mat-card {
 
 
 }
+

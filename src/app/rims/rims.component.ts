@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RimsService } from '../services/rims.service';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from '../../environments/environment';
@@ -12,21 +12,63 @@ import Swal from 'sweetalert2';
   styleUrls: ['./rims.component.css']
 })
 export class RimsComponent implements OnInit {
+
+
+
+
   imagesUrl = environment.STATIC_FILES_URL;
   public rims = [];
   currentBrand;
 
+  printSKU;
+  printqty;
+  printpartsupl;
+  printdescription;
+  printdatemfg;
+  printserial;
+
+  @ViewChild('printbtn', { static: false }) printbtn: ElementRef;
   constructor(private rim: RimsService, public dialog: MatDialog, private brand: BrandsService, private router: Router) {
 
   }
 
+  public config = {
+    printMode: 'template-popup', // template
+    popupProperties: 'toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,fullscreen=yes',
+    pageTitle: 'Hello World',
+    templateString: '<header>I\'m part of the template header</header>{{printBody}}<footer>I\'m part of the template footer</footer>',
+    stylesheets: [{ rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' }],
+    styles: ['td { border: 1px solid black; color: green; }', 'table { border: 1px solid black; color: red }', 'header, table, footer { margin: auto; text-align: center; }']
+  }
+
   ngOnInit(): void {
-    this.currentBrand = history.state.data;
+
+    this.currentBrand = localStorage.getItem('currentBrand');
     this.getRimsByBrand();
+
 
 
   }
 
+  triggerPrint(item) {
+
+    this.printSKU = item.sku;
+    this.printqty = item.qty;
+    this.printpartsupl = item.partsupl;
+    this.printdescription = item.description;
+    this.printdatemfg = item.datemfg;
+    this.printserial = item.serial;
+
+    setTimeout(() => {                           // <<<---using ()=> syntax
+      console.log(this.printbtn);
+      this.printbtn.nativeElement.click();
+    }, 1000);
+
+
+    /*   this.printbtn.nativeElement.on('click',()=>{ 
+        alert("test"); 
+      }); */
+  }
   getRimsByBrand() {
     this.rim.getAll().subscribe((response) => {
       let _response;
@@ -47,7 +89,6 @@ export class RimsComponent implements OnInit {
 
   }
 
-  printHere() { }
 
   openDialog(comp) {
     //localStorage.setItem('currentBrand',this.currentBrand);
