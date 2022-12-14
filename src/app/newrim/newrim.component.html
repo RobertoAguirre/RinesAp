@@ -21,28 +21,48 @@
             <input matInput="" id="description" type="text" formControlName="description">
         </mat-form-field>
 
+        <mat-form-field class="example-full-width">
+            <label for="partsupl">PartSupl: </label>
+            <input matInput="" id="partsupl" type="text" formControlName="partsupl">
+        </mat-form-field>
 
-        <!--         <mat-form-field class="example-full-width">
+        <mat-form-field class="example-full-width">
+            <label for="serial">Serial: </label>
+            <input matInput="" id="serial" type="text" formControlName="serial">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <label for="datemfg">Date Mfg: </label>
+            <input matInput="" id="datemfg" type="text" formControlName="datemfg">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <label for="qty">Cantidad: </label>
+            <input matInput="" id="qty" type="text" formControlName="qty">
+        </mat-form-field>
+
+
+        <mat-form-field class="example-full-width">
             <label for="brand">Marca: </label>
-            <input matInput="" id="brand" type="text" formControlName="brand">
+            <input readonly="true" matInput="" id="brand" type="text" formControlName="brand">
 
-        </mat-form-field> -->
+        </mat-form-field>
 
-        <mat-form-field class="example-full-width" appearance="fill">
+        <!--         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Marcas</mat-label>
             <mat-select formControlName="brand">
                 <mat-option *ngFor="let item of brands" [value]="item.brand">
                     {{item.brand}}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
-        <br/>
+        </mat-form-field> -->
+        <br />
 
 
 
         <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
 
-<!--         <div class="file-upload">
+        <!--         <div class="file-upload">
 
             {{fileName || "Elegir imagen"}}
 
@@ -52,10 +72,10 @@
         </div>
  -->
 
-        
+
 
         <div class="form-control">
-            <br/>
+            <br />
             <button mat-raised-button color="accent" type="submit">Guardar</button>
         </div>
 

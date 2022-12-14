@@ -40,7 +40,10 @@ export class AuthInterceptor implements HttpInterceptor {
       headers: headers
     });
 
-    return next.handle(reqClone).pipe(
+/*     return next.handle(reqClone).pipe(
+      catchError(this.myErrorHandler)
+    ); */
+    return next.handle(request).pipe(
       catchError(this.myErrorHandler)
     );
   }

@@ -50,6 +50,7 @@ export class RimsComponent implements OnInit {
   printHere() { }
 
   openDialog(comp) {
+    //localStorage.setItem('currentBrand',this.currentBrand);
     const dialogRef = this.dialog.open(ModalComponent, {
       /*       width: '330px',
             height: '400px', */

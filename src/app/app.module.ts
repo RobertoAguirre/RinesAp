@@ -30,6 +30,10 @@ import { GreenprintComponent } from './components/greenprint/greenprint.componen
 
 import { AuthModule } from './auth/auth.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { NewuserComponent } from './newuser/newuser.component';
+import { UsersComponent } from './users/users.component';
+import {MatTableModule} from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +44,9 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     FileuploadComponent,
     NewbrandComponent,
     RimsComponent,
-    GreenprintComponent
+    GreenprintComponent,
+    NewuserComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +64,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatCardModule,
     MatDialogModule,
     MatSelectModule,
+    MatTableModule,
     FormsModule,
     ReactiveFormsModule
   ],

@@ -4,18 +4,47 @@
   </button>
   <span>Impresión de etiquetas</span>
   <span class="example-spacer"></span>
+  <label>{{username}}</label>
   <button (click)="logout()" mat-icon-button aria-label="logout button icon-button with logout icon">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
 <section>
-  <div class="parent">
-    <mat-card   (click)="goToRims(item.brand);" *ngFor="let item of brands">
-      <mat-card-header><h2>Marca:{{item.brand}}</h2></mat-card-header>
+
+  <div *ngIf="admin" style="margin-left: 2em; margin-top:1em;">
+
+    <button (click)="goToUsers()" mat-raised-button color="accent" aria-label="Icon button for new rim">
+      <mat-icon>add</mat-icon>
+      Agregar usuario
+    </button>
+    <button style="margin-left: 2em;" (click)="openDialog('brands')" mat-raised-button color="accent"
+      aria-label="Icon button for new rim">
+      <mat-icon>add</mat-icon>
+      Agregar marca
+    </button>
+  </div>
+
+
+
+
+  <div class="parent" *ngIf="brands">
+    <mat-card *ngFor="let item of brands">
+      <mat-card-header>
+        <h2>Marca:{{item.brand}}</h2>
+      </mat-card-header>
       <mat-card-content>
-        
-        <img mat-card-image src="{{imagesUrl}}/brands/{{item.brandlogo}}" class="imgincard" />
+
+        <img (click)="goToRims(item.brand);" mat-card-image src="{{imagesUrl}}/brands/{{item.brandlogo}}" class="imgincard" />
+
+
       </mat-card-content>
+      <mat-card-actions  *ngIf="admin">
+        <button (click)="deleteBrand(item)" mat-raised-button>
+          Eliminar marca
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+        
+      </mat-card-actions>
 
     </mat-card>
 
@@ -24,12 +53,7 @@
   </div>
   <section>
 
-    <div>
-      <button (click)="openDialog('brands')" class="fabNewRim" mat-fab color="accent" aria-label="Icon button for new rim">
-        <mat-icon>add</mat-icon>
-        Marca
-      </button>
-    </div>
+
 
 
   </section>

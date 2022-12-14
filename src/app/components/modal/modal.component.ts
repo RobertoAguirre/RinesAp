@@ -13,6 +13,7 @@ export class ModalComponent implements OnInit {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {componentToShow}) {
+    if(this.data)
     this.componentToShow = this.data.componentToShow;
     
   }

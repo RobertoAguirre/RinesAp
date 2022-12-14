@@ -1,0 +1,51 @@
+<h1>Nuevo usuario</h1>
+
+<div class="form-group">
+    <form [formGroup]="newuserForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field class="example-full-width">
+            <mat-label for="username">Usuario: </mat-label>
+            <input matInput="" id="username" type="text" formControlName="username">
+        </mat-form-field>
+
+
+<!--         <mat-form-field class="example-full-width">
+            <label for="role">Rol: </label>
+            <input matInput="" id="role" type="text" formControlName="role">
+
+        </mat-form-field> -->
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Rol</mat-label>
+            <mat-select formControlName="role">
+                <mat-option [value]="'admin'">
+                    Administrador
+                </mat-option>
+                <mat-option [value]="'usuario'">
+                    Usuario
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="example-full-width">
+            <label for="password">Password: </label>
+            <input matInput="" id="password" type="password" formControlName="password">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <label for="confirmPassword">Confirm password: </label>
+            <input matInput="" id="confirmPassword" type="password" formControlName="confirmPassword">
+        </mat-form-field>
+
+        <br />
+
+        <div class="form-control">
+            <br />
+            <button [disabled]="!newuserForm.valid" mat-raised-button color="accent" type="submit">Guardar</button>
+        </div>
+
+
+    </form>
+
+</div>

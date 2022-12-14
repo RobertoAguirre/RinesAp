@@ -12,11 +12,38 @@ export class NewrimComponent implements OnInit  {
   fileName = '';
   file;
   brands = [];
-  constructor(private rim:RimsService,private brand:BrandsService){
+  currentBrand = localStorage.getItem('currentBrand');
 
+  /*   sku: data.sku,
+  modelname: data.modelname,
+  description: data.description,
+  partsupl: data.partsupl,
+  serial: data.serial,
+  datemfg: data.datemfg,
+  qty: data.qty,
+  brand: data.brand,
+  photo: req.file.filename
+ */
+  newrimForm = new FormGroup({
+    sku: new FormControl(''),
+    modelname: new FormControl(''),
+    description: new FormControl(''),
+    partsupl: new FormControl(''),
+    serial: new FormControl(''),
+    datemfg: new FormControl(''),
+    qty: new FormControl(''),
+    brand: new FormControl(`${this.currentBrand}`),
+    photo: new FormControl('')
+  });
+  
+
+  constructor(private rim:RimsService,private brand:BrandsService){
+    //this.currentBrand = localStorage.getItem('currentBrand');
   }
+
   ngOnInit(): void {
 
+    //this.newrimForm.setValue['brand'] = this.currentBrand;
     this.brand.getAll().subscribe((response) => {
       let _response;
       _response = response;
@@ -25,14 +52,8 @@ export class NewrimComponent implements OnInit  {
     })
   }
 
-  newrimForm = new FormGroup({
-    sku: new FormControl(''),
-    modelname: new FormControl(''),
-    description: new FormControl(''),
-    brand: new FormControl(''),
-    photo: new FormControl('')
-  });
-  
+
+
   onFileSelected(event) {
 
     const file:File = event.target.files[0];
