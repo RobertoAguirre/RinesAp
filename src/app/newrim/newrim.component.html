@@ -4,7 +4,7 @@
     <form [formGroup]="newrimForm" (ngSubmit)="onSubmit()">
 
         <mat-form-field class="example-full-width">
-            <mat-label for="sku">SKU: </mat-label>
+            <mat-label for="sku">Part Cust (P): </mat-label>
             <input matInput="" id="sku" type="text" formControlName="sku">
         </mat-form-field>
 
@@ -60,7 +60,7 @@
 
 
 
-        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+        <input  type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
 
         <!--         <div class="file-upload">
 
@@ -76,7 +76,7 @@
 
         <div class="form-control">
             <br />
-            <button mat-raised-button color="accent" type="submit">Guardar</button>
+            <button [disabled]="!newrimForm.valid" mat-raised-button color="accent" type="submit">Guardar</button>
         </div>
 
 

@@ -79,13 +79,42 @@ export class RimsComponent implements OnInit {
   }
 
   deleteRim(rim) {
-    this.rim.delete(rim).subscribe((response) => {
-      let _response;
-      _response = response;
-      Swal.fire('Modelo eliminado!', 'xx', 'success')
-      this.getRimsByBrand();
 
+
+    Swal.fire({
+      title: 'Esta a punto de eliminar un modelo, ¿esta seguro?',
+      text: 'Esta operación no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar modelo',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.rim.delete(rim).subscribe((response) => {
+          let _response;
+          _response = response;
+          Swal.fire(
+            'Eliminado!',
+            'El modelo ha sido eliminado.',
+            'success'
+          )
+          this.getRimsByBrand();
+
+        })
+
+        Swal.fire(
+          'Eliminado!',
+          'El modelo ha sido eliminados.',
+          'success'
+        )
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+
+      }
     })
+
+
+
+
 
   }
 
@@ -102,6 +131,7 @@ export class RimsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.getRimsByBrand();
     });
   }
 
