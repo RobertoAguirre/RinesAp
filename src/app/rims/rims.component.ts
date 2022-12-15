@@ -86,7 +86,7 @@ export class RimsComponent implements OnInit {
       }); */
   }
   getRimsByBrand() {
-    this.rim.getAll().subscribe((response) => {
+    this.rim.getAllByBrand(this.currentBrand).subscribe((response) => {
       let _response;
       _response = response;
       this.rims = _response.results;

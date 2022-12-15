@@ -16,6 +16,11 @@ export class RimsService {
   public getAll() {
     return this.http.get(environment.SERVER_URL + '/rims');
   }
+
+
+  public getAllByBrand(brand) {
+    return this.http.get(`${environment.SERVER_URL}/rims/getRimsByBrand/${brand}`);
+  }
   public delete(data) {
     return this.http.delete(`${environment.SERVER_URL}/rims/${data.sku}` );
   }
