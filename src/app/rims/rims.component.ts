@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { ModalComponent } from '../components/modal/modal.component';
 import { BrandsService } from '../services/brands.service';
 import { Router } from '@angular/router';
+import { ExportService } from '../services/export.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-rims',
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class RimsComponent implements OnInit {
 
+  @ViewChild('printcontainer') printableElement: ElementRef; //referencia a la tabla a exportar
 
   id;
   role;
@@ -32,7 +34,7 @@ export class RimsComponent implements OnInit {
   printserial;
 
   @ViewChild('printbtn', { static: false }) printbtn: ElementRef;
-  constructor(private rim: RimsService, public dialog: MatDialog, private brand: BrandsService, private router: Router) {
+  constructor(private exportService: ExportService, private rim: RimsService, public dialog: MatDialog, private brand: BrandsService, private router: Router) {
 
   }
 
@@ -51,6 +53,21 @@ export class RimsComponent implements OnInit {
     this.getStoredVariables();
     this.getRimsByBrand();
 
+
+
+  }
+
+  exportarPdf(item) {
+    this.printSKU = item.sku;
+    this.printqty = item.qty;
+    this.printpartsupl = item.partsupl;
+    this.printdescription = item.description;
+    this.printdatemfg = item.datemfg;
+    this.printserial = item.serial;
+
+    setTimeout(() => {                           // <<<---using ()=> syntax
+      this.exportService.exportToPdf(this.printableElement, 'user_data');
+    }, 1000);
 
 
   }

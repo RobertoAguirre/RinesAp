@@ -38,23 +38,25 @@
             </mat-card-content>
             <mat-card-actions>
                 <div>
-                    <!--  <button  [print]="['print-section']">otro Print element</button> -->
+                    <!--  <button  [print]="['printcontainer']">otro Print element</button> -->
 
 
-                    <button mat-raised-button color="accent" (click)="triggerPrint(item)"> <mat-icon>print</mat-icon>
+                    <!--                     <button mat-raised-button color="accent" (click)="triggerPrint(item)"> <mat-icon>print</mat-icon>
                         Imprimir</button>
-                    <br>
+                    <br> -->
 
                     <!-- boton escondido para ngxprint -->
-                    <button #printbtn style="display: none; margin-left:2em;" color="accent"
-                        aria-label="Icon button for new rim" printSectionId="print-section" printTitle="etiqueta"
+                    <!--                     <button #printbtn style="display: none; margin-left:2em;" color="accent"
+                        aria-label="Icon button for new rim" printSectionId="printcontainer" printTitle="etiqueta"
                         ngxPrint>
                         <mat-icon>print</mat-icon>
                         Imprimir
                     </button>
-
+ -->
                     <!--    <button #print printTitle="report" printSectionId="content-section" ngxPrint hidden="true"
                         [useExistingCss]="true"></button> -->
+                    <button color="accent" mat-raised-button (click)="exportarPdf(item)"> <mat-icon>print</mat-icon>
+                        Imprimir</button>
                 </div>
                 <div style="margin-left:3em;">
                     <button *ngIf="admin" (click)="deleteRim(item)" mat-raised-button>
@@ -62,6 +64,7 @@
                         <mat-icon color="warn">delete</mat-icon>
                     </button>
                 </div>
+
 
             </mat-card-actions>
 
@@ -71,20 +74,20 @@
 
     </div>
 
-    <div hidden id="print-section">
+    <div style="display: none;" #printcontainer id="printcontainer">
         <table border="1"
             style="margin-left: 3em; font-size: x-large; line-height: .9; font-family: Arial, Helvetica, monospace, sans-serif;">
             <tr>
-                <td colspan="2" style="overflow: auto;width: 1500px; vertical-align:top;">
+                <td colspan="2" style="overflow: auto; vertical-align:top;">
 
                     PART CUST
-                    <div style="margin-top: -1.5em;">
-                        <P style="font-size: 250%;">{{printSKU}}</P>
+                    <div>
+                        <P>{{printSKU}}</P>
                         <br />
                     </div>
 
 
-                    <div style="margin-top: -15%;">
+                    <div style="margin-top: -5%;">
                         <ngx-barcode6 [bc-height]="65" [bc-format]="'CODE128'" [bc-value]="printSKU"
                             [bc-display-value]="false">
                         </ngx-barcode6>
@@ -102,8 +105,8 @@
             <tr>
                 <td style="vertical-align:top;" colspan="2">
 
-                    <label style="font-size: 100%;"> QTY (Q) #</label>
-                    <label style="display: inline; font-size: 250%; margin-top: -5%;">
+                    <label> QTY (Q) #</label>
+                    <label style="display: inline; margin-top: -5%;">
                         {{printqty}}
                     </label>
                     <div>
@@ -115,7 +118,7 @@
                 </td>
                 <td style="vertical-align:top;" colspan="2">
                     <p style="font-size: 100%;"> PART NUMBER DESCRIPTION</p>
-                    <p style="font-size: 150%; margin-top: -5%;">
+                    <p>
                         {{printdescription}}
                     </p>
 
@@ -123,11 +126,11 @@
             </tr>
             <tr>
                 <td style="vertical-align:top;">
-                    <p style="font-size: 100%;"> PART SUPL (V) #</p>
-                    <p style="font-size: 250%; margin-top: -7%;">
+                    <p> PART SUPL (V) #</p>
+                    <p>
                         {{printpartsupl}}
                     </p>
-                    <div style="margin-top: -2.5em;">
+                    <div>
                         <ngx-barcode6 [bc-height]="65" [bc-format]="'CODE128'" [bc-value]="printpartsupl"
                             [bc-display-value]="false">
                         </ngx-barcode6>
@@ -152,11 +155,11 @@
             <tr>
                 <td style="vertical-align:top;" colspan="2">
 
-                    <p style="font-size: 100%;"> SERIAL # (3S) </p>
-                    <p style="font-size: 250%; margin-top: -5%; ">
+                    <p> SERIAL # (3S) </p>
+                    <p>
                         {{printserial}}
                     </p>
- 
+
                     <div style="margin-top: -10%;">
                         <ngx-barcode6 [bc-height]="65" [bc-format]="'CODE128'" [bc-value]="printserial"
                             [bc-display-value]="false">
