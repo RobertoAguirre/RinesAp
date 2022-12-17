@@ -39,9 +39,11 @@ export class ExportService {
       var heightLeft = imgHeight;
 
       const contentDataURL = canvas.toDataURL('image/png')
+
+      //16.3 largo x 10.2 alto
       //let pdf = new jspdf('portrait', 'mm', 'a4'); // A4 size page of PDF    
       //let pdf = new jspdf('landscape', 'cm', [20,40]); // A4 size page of PDF   
-      let pdf = new jspdf('landscape', 'cm', 'letter'); // A4 size page of PDF   
+      let pdf = new jspdf('landscape', 'cm', [16.3,10.2]); // A4 size page of PDF   
       var position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
 
