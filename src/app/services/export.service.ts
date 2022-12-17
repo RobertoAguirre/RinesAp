@@ -1,10 +1,10 @@
 
 import { Injectable, ElementRef } from '@angular/core';
-import * as FileSaver from 'file-saver';
 //import * as XLSX from 'xlsx';
 import html2canvas from 'html2canvas';
 import jspdf from 'jspdf';
 import { RimsService } from '../services/rims.service';
+import Swal from 'sweetalert2';
 
 const EXCEL_EXTENSION = '.xlsx';
 
@@ -24,7 +24,7 @@ export class ExportService {
 
 
   // this generates single page  
-  public exportToPdf(element: ElementRef, fileName: string) {
+  public exportToPdf(element: ElementRef, fileName: string,labelColor) {
     var data = document.getElementById('printcontainer');
     html2canvas(data, {
       onclone: function (clonedDoc) {
@@ -45,10 +45,29 @@ export class ExportService {
       var position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
 
-      pdf.save('report.pdf'); // Generated PDF     
+      //pdf.save('report.pdf'); // Generated PDF     
       let file = pdf.output('blob');
       const formData = new FormData();
+      formData.append('labelColor',labelColor);
       formData.append('pdf',file);
+      this.rims.sendToPrint(formData,labelColor).subscribe((response)=>{
+        let _response;
+        _response = response;
+        if(_response.message==='error printing'){
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error en el servicio de impresión'
+          });
+        }else{
+          // Swal.fire(
+          //   '¡Guardado!',
+          //   'La marca se guardó correctamente',
+          //   'success'
+          // );
+        }
+
+      })
       
 
     });

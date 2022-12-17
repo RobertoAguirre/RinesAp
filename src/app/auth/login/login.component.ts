@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -41,7 +41,11 @@ export class LoginComponent implements OnInit {
         //this.router.navigateByUrl(this.loginUrl);
         this.router.navigateByUrl('/home');
       } else {
-        alert("wrong password");
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Usuario o contraseña incorrectos'
+        });
 
       }
 

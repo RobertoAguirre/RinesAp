@@ -64,9 +64,10 @@ export class RimsComponent implements OnInit {
     this.printdescription = item.description;
     this.printdatemfg = item.datemfg;
     this.printserial = item.serial;
+    
 
     setTimeout(() => {                           // <<<---using ()=> syntax
-      this.exportService.exportToPdf(this.printableElement, 'user_data');
+      this.exportService.exportToPdf(this.printableElement, 'user_data',item.labelColor);
     }, 1000);
 
 

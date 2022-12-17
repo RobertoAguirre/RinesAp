@@ -25,4 +25,13 @@ export class RimsService {
     return this.http.delete(`${environment.SERVER_URL}/rims/${data.sku}` );
   }
 
+  public sendToPrint(data,labelColor){
+        if(labelColor==='ORANGE'){
+          return this.http.post(`${environment.SERVER_URL}/print/printorangelabel`,data );
+
+        }else{
+          return this.http.post(`${environment.SERVER_URL}/print/printgreenlabel`,data );
+        }
+  }
+
 }
