@@ -48,19 +48,23 @@
 
         </mat-form-field>
 
-        <!--         <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Marcas</mat-label>
-            <mat-select formControlName="brand">
-                <mat-option *ngFor="let item of brands" [value]="item.brand">
-                    {{item.brand}}
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Etiqueta</mat-label>
+            <mat-select formControlName="labelColor">
+                <mat-option [value]="'orange'">
+                    Naranga
+                </mat-option>
+                <mat-option [value]="'green'">
+                    Verde
                 </mat-option>
             </mat-select>
-        </mat-form-field> -->
+        </mat-form-field>
+
         <br />
 
 
 
-        <input  type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
 
         <!--         <div class="file-upload">
 

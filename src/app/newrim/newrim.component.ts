@@ -35,6 +35,7 @@ export class NewrimComponent implements OnInit {
     datemfg: new FormControl('', [Validators.required]),
     qty: new FormControl('', [Validators.required]),
     brand: new FormControl(`${this.currentBrand}`),
+    labelColor: new FormControl(''),
     photo: new FormControl('')
   });
 
@@ -81,6 +82,7 @@ export class NewrimComponent implements OnInit {
     formData.append("datemfg", this.newrimForm.value['datemfg']);
     formData.append("qty", this.newrimForm.value['qty']);
     formData.append("brand", this.newrimForm.value['brand'].toUpperCase());
+    formData.append("labelColor", this.newrimForm.value['labelColor'].toUpperCase());
     formData.append("photo", this.file);
 
     this.rim.save(formData).subscribe((response) => {
