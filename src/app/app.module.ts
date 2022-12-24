@@ -35,6 +35,9 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NewuserComponent } from './newuser/newuser.component';
 import { UsersComponent } from './users/users.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+
 
 
 @NgModule({
@@ -61,6 +64,8 @@ import {MatTableModule} from '@angular/material/table';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     MatToolbarModule,
     MatGridListModule,
     MatCardModule,

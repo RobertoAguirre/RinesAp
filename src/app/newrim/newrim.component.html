@@ -31,10 +31,19 @@
             <input matInput="" id="serial" type="text" formControlName="serial">
         </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <label for="datemfg">Date Mfg: </label>
-            <input matInput="" id="datemfg" type="text" formControlName="datemfg">
-        </mat-form-field>
+        <!-- <mat-form-field class="example-full-width">
+            <label for="datemfg">Fecha de fabricación: </label>
+            <input matInput="" id="datemfg" type="date" formControlName="datemfg">
+        </mat-form-field> -->
+
+        <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label for="datemfg">Fecha de fabricación:</mat-label>
+            <input matInput id="datemfg" type="date" formControlName="datemfg" [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
 
         <mat-form-field class="example-full-width">
             <label for="qty">Cantidad: </label>
