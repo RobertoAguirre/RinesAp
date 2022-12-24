@@ -36,13 +36,22 @@
             <input matInput="" id="datemfg" type="date" formControlName="datemfg">
         </mat-form-field> -->
 
-        <mat-form-field appearance="fill" class="example-full-width">
+        <!-- <mat-form-field appearance="fill" class="example-full-width">
             <mat-label for="datemfg">Fecha de fabricación:</mat-label>
             <input matInput id="datemfg" type="date" formControlName="datemfg" [matDatepicker]="picker">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field> -->
+
+          <mat-form-field  class="example-full-width">
+            <mat-label>Fecha de fabricación:</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="datemfg">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
+          
           
 
         <mat-form-field class="example-full-width">
