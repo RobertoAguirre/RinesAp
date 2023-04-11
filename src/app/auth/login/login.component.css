@@ -13,9 +13,13 @@
   margin-top: 5em;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 30%;
 }
 
 .loginbutton{
   text-align: center;
+}
+
+.main-div{
+  background-color: aqua;
 }

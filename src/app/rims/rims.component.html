@@ -20,21 +20,16 @@
     <div class="parent" *ngIf="rims">
         <mat-card *ngFor="let item of rims">
             <mat-card-header>
-                <h2>{{item.sku}}</h2>
+                <!-- <h2>{{item.sku}}</h2> -->
             </mat-card-header>
             <mat-card-content>
-                <!--                     <p>
-                        Modelo:{{item.modelname}}
-                    </p>
-                    <p>
-                        Descripción:{{item.description}}
-                    </p>
-                    <p>
-                        brand:{{item.brand}}
-                    </p> -->
-                <!--   <br /> -->
-
-                <img src="{{imagesUrl}}/rims/{{item.photo}}" class="imgincard" />
+                <div>
+                    <h2>{{item.sku}}</h2>
+                </div>
+                <div>
+                    <img src="{{imagesUrl}}/rims/{{item.photo}}" class="imgincard" />
+                </div>
+                
             </mat-card-content>
             <mat-card-actions>
                 <div>
@@ -71,18 +66,21 @@
         </mat-card>
 
 
-
+        {{printSKU}}
     </div>
 
-    <div style="display: none;" #printcontainer id="printcontainer">
+    <div style="display: block;" #printcontainer id="printcontainer" target="_blank">
         <table border="1"
             style="margin-left: 3em; font-size: x-large; line-height: .9; font-family: Arial, Helvetica, monospace, sans-serif;">
             <tr>
-                <td colspan="2" style="overflow: auto; vertical-align:top;">
+                <td colspan="2" style="overflow: auto; vertical-align:top;font-size: .5em">
 
-                    PART CUST
-                    <div>
-                        <P>{{printSKU}}</P>
+                    <div colspan="2">
+                        PART <br/> CUST (P) 
+                        
+                    </div>
+                    <div colspan="2">
+                        <h1>{{lprintSKU}}</h1>
                         <br />
                     </div>
 
@@ -96,16 +94,54 @@
 
 
                 </td>
-                <td colspan="2" style="vertical-align:top; word-wrap: break-word;">
+                <td colspan="2" style="vertical-align:top; word-wrap: break-word; font-size: .5em">
                     SHIP FROM MAXION WHEELS DE MEX<br>
-                    AVENIDA INDUSTRIAL<br>
-                    CHIHUAHUA, RF
+                    AVENIDA INDUSTRIAL U<br>
+                    CHIHUAHUA, RF 31074
+                    (614)429-04-37
                 </td>
             </tr>
+
+
+
+            
             <tr>
                 <td style="vertical-align:top;" colspan="2">
-
-                    <label> QTY (Q) #</label>
+                    <mat-grid-list cols="4" rowHeight="50px">
+                        <mat-grid-tile [colspan]= "1" [rowspan]="1">
+                            <p style="font-size: .5em;text-align: left;"> QTY <br> (Q) </p>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]= "3" [rowspan]="1">
+                            <p style="font-size: 1.5em;">
+                                {{lprintqty}}
+                            </p>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]= "4" [rowspan]="1">
+                            <div style="margin-left: -3em;">
+                                <ngx-barcode6 [bc-height]="65" [bc-element-type]="'svg'" [bc-format]="'CODE128'"
+                                    [bc-value]="printqty" [bc-display-value]="false">
+                                </ngx-barcode6>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <!-- <mat-grid-list cols="4" rowHeight="50px">
+                        <mat-grid-tile [colspan]= "2" [rowspan]="1">
+                            <label  style="font-size: .5em;text-align: left;"> QTY <br> (Q)</label>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]= "2" [rowspan]="2">
+                            <label style="display: inline; margin-top: -5%;font-size: 2em;">
+                               {{printqty}}
+                            </label>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]= "2" [rowspan]="1">
+                            <div>
+                                <ngx-barcode6 [bc-height]="65" [bc-element-type]="'svg'" [bc-format]="'CODE128'"
+                                    [bc-value]="printqty" [bc-display-value]="false">
+                                </ngx-barcode6>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list> -->
+<!--                     <label> QTY (Q) #</label>
                     <label style="display: inline; margin-top: -5%;">
                         {{printqty}}
                     </label>
@@ -113,20 +149,37 @@
                         <ngx-barcode6 [bc-height]="65" [bc-element-type]="'svg'" [bc-format]="'CODE128'"
                             [bc-value]="printqty" [bc-display-value]="false">
                         </ngx-barcode6>
-                    </div>
+                    </div> -->
 
                 </td>
                 <td style="vertical-align:top;" colspan="2">
-                    <p style="font-size: 100%;"> PART NUMBER DESCRIPTION</p>
-                    <p>
+                    <p style="font-size: .5em"> PART NUMBER DESCRIPTION</p>
+                    <p style="width: 80%;">
                         {{printdescription}}
                     </p>
 
                 </td>
             </tr>
             <tr>
-                <td style="vertical-align:top;">
-                    <p> PART SUPL (V) #</p>
+                <td style="vertical-align:top;" colspan="2">
+                    <mat-grid-list cols="4" rowHeight="50px">
+                        <mat-grid-tile [colspan]= "1" [rowspan]="1">
+                            <p style="font-size: .5em;text-align: left;"> PART # <br> SUPL (V) </p>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]= "3" [rowspan]="1">
+                            <p style="font-size: 1.5em;">
+                                {{lprintpartsupl}}
+                            </p>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]= "4" [rowspan]="1">
+                            <div>
+                                <ngx-barcode6 [bc-height]="100" [bc-format]="'CODE128'" [bc-value]="printpartsupl"
+                                    [bc-display-value]="false">
+                                </ngx-barcode6>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                   <!--  <p> PART SUPL (V) #</p>
                     <p>
                         {{printpartsupl}}
                     </p>
@@ -134,18 +187,25 @@
                         <ngx-barcode6 [bc-height]="65" [bc-format]="'CODE128'" [bc-value]="printpartsupl"
                             [bc-display-value]="false">
                         </ngx-barcode6>
-                    </div>
+                    </div> -->
 
                 </td>
 
                 <td style="vertical-align:top;">
-                    CHANGE <br />LETTER
+                   <p style="font-size: .5em;text-align: left;">
+                    CHANGE <br> LETTER
+                   </p> 
                 </td>
-                <TD>
+<!--                 <TD>
 
-                </TD>
+                </TD> -->
                 <TD style="vertical-align:top;">
-                    DATE MFG<br /> {{printdatemfg}}
+                  <p style="font-size: .5em;text-align: left;">
+                    DATE <br> MFG
+                    <br /> 
+                    <br />
+                    {{printdatemfg | date: 'dd/MM/yyyy'}}
+                 </p>  
                 </TD>
 
             </tr>
@@ -154,8 +214,27 @@
             </tr>
             <tr>
                 <td style="vertical-align:top;" colspan="2">
+                    <mat-grid-list cols="4" rowHeight="50px">
+                        <mat-grid-tile [colspan]= "1" [rowspan]="1">
+                            <p style="font-size: .5em;text-align: left;"> SERIAL # <br> (3S) </p>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]= "3" [rowspan]="1">
+                            <p style="font-size: 1.5em;">
+                                {{lprintserial}}
+                            </p>
+                        </mat-grid-tile>
+                        <mat-grid-tile [colspan]= "4" [rowspan]="1">
+                            <div>
+                                <div style="margin-top: -10%;">
+                                    <ngx-barcode6 [bc-height]="65" [bc-format]="'CODE128'" [bc-value]="printserial"
+                                        [bc-display-value]="false">
+                                    </ngx-barcode6>
+                                </div>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
 
-                    <p> SERIAL # (3S) </p>
+<!--                     <p> SERIAL # (3S) </p>
                     <p>
                         {{printserial}}
                     </p>
@@ -164,15 +243,15 @@
                         <ngx-barcode6 [bc-height]="65" [bc-format]="'CODE128'" [bc-value]="printserial"
                             [bc-display-value]="false">
                         </ngx-barcode6>
-                    </div>
+                    </div> -->
 
 
                 </td>
 
-                <td style="vertical-align:top;">
+                <td style="vertical-align:top; font-size: .5em">
                     DOCK <BR />LOC
                 </td>
-                <td style="vertical-align:top;">
+                <td style="vertical-align:top; font-size: .5em">
                     DROP <BR />ZONE
                 </td>
             </tr>

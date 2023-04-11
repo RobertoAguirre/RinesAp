@@ -9,6 +9,7 @@
     grid-gap: 1em;
     place-items: center;
 
+
 }
 
 .fabNewRim {
@@ -22,9 +23,8 @@
 
 
 .imgincard {
-
-    width: 25em;
-    height: 25em;
+    width: 20em;
+    height: 15em;
 }
 
 /* .parent {

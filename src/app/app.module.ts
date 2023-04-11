@@ -17,6 +17,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 
+
 import { NgxBarcode6Module } from 'ngx-barcode6';
 
 import { HomeComponent } from './home/home.component';
@@ -75,6 +76,10 @@ import {MatNativeDateModule} from '@angular/material/core';
     FormsModule,
     ReactiveFormsModule
   ],
+  exports: [
+    MatGridListModule,
+  ],
+
   providers: [
     {
       provide:HTTP_INTERCEPTORS,

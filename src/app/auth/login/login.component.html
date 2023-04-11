@@ -1,25 +1,32 @@
 
 <section>
 
-    <mat-card class="loginform">
+    <mat-card class="loginform" style="background-color: #DFD9D9;">
         <mat-card-content>
-
+            <div  style="margin-top: -0em; margin-bottom: 0em; text-align:center">
+                <img src="https://getlogo.net/wp-content/uploads/2021/10/maxion-wheels-logo-vector.png" width="50%">
+                
+            </div>
             <h1 style="margin-top: 1em;margin-bottom: 1em; font-weight: bold; text-align: center;">IMPRESIÓN DE ETIQUETAS</h1>
 
             <div>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             
                     <mat-form-field class="example-full-width">
-                        <mat-label for="sku">Username: </mat-label>
+                        <mat-label for="sku">Usuario: </mat-label>
                         <input matInput="" id="sku" type="text" formControlName="username">
                     </mat-form-field>
             
-            
                     <mat-form-field class="example-full-width">
-                        <label for="modelname">Password: </label>
+                        <mat-label for="modelname">Contraseña: </mat-label>
+                        <input matInput="" id="modelname" type="password" formControlName="password">
+                    </mat-form-field>
+
+                   <!--  <mat-form-field class="example-full-width">
+                        <label for="modelname">Contraseña: </label>
                         <input matInput="" id="modelname" type="password" formControlName="password">
             
-                    </mat-form-field>
+                    </mat-form-field> -->
             
                     <div class="loginbutton">
                         <br/>

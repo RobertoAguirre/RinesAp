@@ -13,7 +13,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./rims.component.css']
 })
 export class RimsComponent implements OnInit {
-
+  tiles: any[] = [
+    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
+    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
+    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
+    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
+  ];
   @ViewChild('printcontainer') printableElement: ElementRef; //referencia a la tabla a exportar
 
   id;
@@ -32,6 +37,11 @@ export class RimsComponent implements OnInit {
   printdescription;
   printdatemfg;
   printserial;
+
+  lprintSKU;
+  lprintqty;
+  lprintpartsupl;
+  lprintserial;
 
   @ViewChild('printbtn', { static: false }) printbtn: ElementRef;
   constructor(private exportService: ExportService, private rim: RimsService, public dialog: MatDialog, private brand: BrandsService, private router: Router) {
@@ -58,12 +68,18 @@ export class RimsComponent implements OnInit {
   }
 
   exportarPdf(item) {
-    this.printSKU = item.sku;
-    this.printqty = item.qty;
-    this.printpartsupl = item.partsupl;
+    this.lprintSKU = item.sku;
+    this.lprintqty = item.qty;
+    this.lprintpartsupl = item.partsupl;
+/*     this.printdescription = item.description;
+    this.printdatemfg = item.datemfg; */
+    this.lprintserial = item.serial;
+    this.printSKU = "P" + item.sku;
+    this.printqty = "Q" + item.qty;
+    this.printpartsupl = "P" + item.partsupl;
     this.printdescription = item.description;
     this.printdatemfg = item.datemfg;
-    this.printserial = item.serial;
+    this.printserial = "3S" + item.serial;
     
 
     setTimeout(() => {                           // <<<---using ()=> syntax
@@ -86,12 +102,12 @@ export class RimsComponent implements OnInit {
 
   triggerPrint(item) {
 
-    this.printSKU = item.sku;
-    this.printqty = item.qty;
-    this.printpartsupl = item.partsupl;
+    this.printSKU = "P" + item.sku;
+    this.printqty = "Q" + item.qty;
+    this.printpartsupl = "P" + item.partsupl;
     this.printdescription = item.description;
     this.printdatemfg = item.datemfg;
-    this.printserial = item.serial;
+    this.printserial = "3S" + item.serial;
 
     setTimeout(() => {                           // <<<---using ()=> syntax
       console.log(this.printbtn);
