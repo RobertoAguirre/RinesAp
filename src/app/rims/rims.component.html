@@ -1,130 +1,142 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button fontIcon="home" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span>Impresión de etiquetas</span>
-    <span class="example-spacer"></span>
-    <button (click)="logout()" mat-icon-button aria-label="logout button icon-button with logout icon">
-        <mat-icon>logout</mat-icon>
-    </button>
+  <button
+    mat-icon-button
+    fontIcon="home"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Impresión de etiquetas</span>
+  <span class="example-spacer"></span>
+  <button
+    (click)="logout()"
+    mat-icon-button
+    aria-label="logout button icon-button with logout icon"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
 </mat-toolbar>
 <section>
+  <div *ngIf="admin" style="margin-left: 2em; margin-top: 1em">
+    <button
+      mat-raised-button
+      (click)="openDialog('rims')"
+      color="accent"
+      aria-label="Icon button for new rim"
+    >
+      <mat-icon>add</mat-icon>
+      Nuevo modelo {{ currentBrand }}
+    </button>
+  </div>
 
-    <div *ngIf="admin" style="margin-left: 2em; margin-top:1em;">
-        <button mat-raised-button (click)="openDialog('rims')" color="accent" aria-label="Icon button for new rim">
-            <mat-icon>add</mat-icon>
-            Nuevo modelo {{currentBrand}}
-        </button>
-    </div>
+  <div class="parent" *ngIf="rims">
+    <mat-card *ngFor="let item of rims">
+      <mat-card-header>
+        <!-- <h2>{{item.sku}}</h2> -->
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <h2>{{ item.sku }}<mat-icon *ngIf="item.favorite">star</mat-icon></h2>
+        </div>
+        <div>
+          <img src="{{ imagesUrl }}/rims/{{ item.photo }}" class="imgincard" />
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <div>
+          <button color="accent" mat-raised-button (click)="exportarPdf(item)">
+            <mat-icon>print</mat-icon> Imprimir
+          </button>
+        </div>
+        <div style="margin-left: 3em">
+          <button *ngIf="admin" (click)="deleteRim(item)" mat-raised-button>
+            Eliminar
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
 
-    <div class="parent" *ngIf="rims">
-        <mat-card *ngFor="let item of rims">
-            <mat-card-header>
-                <!-- <h2>{{item.sku}}</h2> -->
-            </mat-card-header>
-            <mat-card-content>
-                <div>
-                    <h2>{{item.sku}}</h2>
-                </div>
-                <div>
-                    <img src="{{imagesUrl}}/rims/{{item.photo}}" class="imgincard" />
-                </div>
-                
-            </mat-card-content>
-            <mat-card-actions>
-                <div>
-                    <!--  <button  [print]="['printcontainer']">otro Print element</button> -->
+    {{ printSKU }}
+  </div>
+  <!--  change display to none to hide printing container for production, change to block for testing -->
+  <div
+    style="display: none"
+    #printcontainer
+    id="printcontainer"
+    target="_blank"
+  >
+    <table
+      border="1"
+      style="
+        margin-left: 3em;
+        font-size: x-large;
+        line-height: 0.9;
+        font-family: Arial, Helvetica, monospace, sans-serif;
+      "
+    >
+      <tr>
+        <td
+          colspan="2"
+          style="overflow: auto; vertical-align: top; font-size: 0.5em"
+        >
+          <div colspan="2">
+            PART <br />
+            CUST (P)
+          </div>
+          <div colspan="2">
+            <h1>{{ lprintSKU }}</h1>
+            <br />
+          </div>
 
+          <div style="margin-top: -5%">
+            <ngx-barcode6
+              [bc-height]="65"
+              [bc-format]="'CODE128'"
+              [bc-value]="printSKU"
+              [bc-display-value]="false"
+            >
+            </ngx-barcode6>
+          </div>
+        </td>
+        <td
+          colspan="2"
+          style="vertical-align: top; word-wrap: break-word; font-size: 0.5em"
+        >
+          SHIP FROM MAXION WHEELS DE MEX<br />
+          AVENIDA INDUSTRIAL U<br />
+          CHIHUAHUA, RF 31074 (614)429-04-37
+        </td>
+      </tr>
 
-                    <!--                     <button mat-raised-button color="accent" (click)="triggerPrint(item)"> <mat-icon>print</mat-icon>
-                        Imprimir</button>
-                    <br> -->
-
-                    <!-- boton escondido para ngxprint -->
-                    <!--                     <button #printbtn style="display: none; margin-left:2em;" color="accent"
-                        aria-label="Icon button for new rim" printSectionId="printcontainer" printTitle="etiqueta"
-                        ngxPrint>
-                        <mat-icon>print</mat-icon>
-                        Imprimir
-                    </button>
- -->
-                    <!--    <button #print printTitle="report" printSectionId="content-section" ngxPrint hidden="true"
-                        [useExistingCss]="true"></button> -->
-                    <button color="accent" mat-raised-button (click)="exportarPdf(item)"> <mat-icon>print</mat-icon>
-                        Imprimir</button>
-                </div>
-                <div style="margin-left:3em;">
-                    <button *ngIf="admin" (click)="deleteRim(item)" mat-raised-button>
-                        Eliminar
-                        <mat-icon color="warn">delete</mat-icon>
-                    </button>
-                </div>
-
-
-            </mat-card-actions>
-
-        </mat-card>
-
-
-        {{printSKU}}
-    </div>
-
-    <div style="display: block;" #printcontainer id="printcontainer" target="_blank">
-        <table border="1"
-            style="margin-left: 3em; font-size: x-large; line-height: .9; font-family: Arial, Helvetica, monospace, sans-serif;">
-            <tr>
-                <td colspan="2" style="overflow: auto; vertical-align:top;font-size: .5em">
-
-                    <div colspan="2">
-                        PART <br/> CUST (P) 
-                        
-                    </div>
-                    <div colspan="2">
-                        <h1>{{lprintSKU}}</h1>
-                        <br />
-                    </div>
-
-
-                    <div style="margin-top: -5%;">
-                        <ngx-barcode6 [bc-height]="65" [bc-format]="'CODE128'" [bc-value]="printSKU"
-                            [bc-display-value]="false">
-                        </ngx-barcode6>
-                    </div>
-
-
-
-                </td>
-                <td colspan="2" style="vertical-align:top; word-wrap: break-word; font-size: .5em">
-                    SHIP FROM MAXION WHEELS DE MEX<br>
-                    AVENIDA INDUSTRIAL U<br>
-                    CHIHUAHUA, RF 31074
-                    (614)429-04-37
-                </td>
-            </tr>
-
-
-
-            
-            <tr>
-                <td style="vertical-align:top;" colspan="2">
-                    <mat-grid-list cols="4" rowHeight="50px">
-                        <mat-grid-tile [colspan]= "1" [rowspan]="1">
-                            <p style="font-size: .5em;text-align: left;"> QTY <br> (Q) </p>
-                        </mat-grid-tile>
-                        <mat-grid-tile [colspan]= "3" [rowspan]="1">
-                            <p style="font-size: 1.5em;">
-                                {{lprintqty}}
-                            </p>
-                        </mat-grid-tile>
-                        <mat-grid-tile [colspan]= "4" [rowspan]="1">
-                            <div style="margin-left: -3em;">
-                                <ngx-barcode6 [bc-height]="65" [bc-element-type]="'svg'" [bc-format]="'CODE128'"
-                                    [bc-value]="printqty" [bc-display-value]="false">
-                                </ngx-barcode6>
-                            </div>
-                        </mat-grid-tile>
-                    </mat-grid-list>
-                    <!-- <mat-grid-list cols="4" rowHeight="50px">
+      <tr>
+        <td style="vertical-align: top" colspan="2">
+          <mat-grid-list cols="4" rowHeight="50px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+              <p style="font-size: 0.5em; text-align: left">
+                QTY <br />
+                (Q)
+              </p>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="3" [rowspan]="1">
+              <p style="font-size: 1.5em">
+                {{ lprintqty }}
+              </p>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+              <div style="margin-left: -3em">
+                <ngx-barcode6
+                  [bc-height]="65"
+                  [bc-element-type]="'svg'"
+                  [bc-format]="'CODE128'"
+                  [bc-value]="printqty"
+                  [bc-display-value]="false"
+                >
+                </ngx-barcode6>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+          <!-- <mat-grid-list cols="4" rowHeight="50px">
                         <mat-grid-tile [colspan]= "2" [rowspan]="1">
                             <label  style="font-size: .5em;text-align: left;"> QTY <br> (Q)</label>
                         </mat-grid-tile>
@@ -141,7 +153,7 @@
                             </div>
                         </mat-grid-tile>
                     </mat-grid-list> -->
-<!--                     <label> QTY (Q) #</label>
+          <!--                     <label> QTY (Q) #</label>
                     <label style="display: inline; margin-top: -5%;">
                         {{printqty}}
                     </label>
@@ -150,36 +162,41 @@
                             [bc-value]="printqty" [bc-display-value]="false">
                         </ngx-barcode6>
                     </div> -->
-
-                </td>
-                <td style="vertical-align:top;" colspan="2">
-                    <p style="font-size: .5em"> PART NUMBER DESCRIPTION</p>
-                    <p style="width: 80%;">
-                        {{printdescription}}
-                    </p>
-
-                </td>
-            </tr>
-            <tr>
-                <td style="vertical-align:top;" colspan="2">
-                    <mat-grid-list cols="4" rowHeight="50px">
-                        <mat-grid-tile [colspan]= "1" [rowspan]="1">
-                            <p style="font-size: .5em;text-align: left;"> PART # <br> SUPL (V) </p>
-                        </mat-grid-tile>
-                        <mat-grid-tile [colspan]= "3" [rowspan]="1">
-                            <p style="font-size: 1.5em;">
-                                {{lprintpartsupl}}
-                            </p>
-                        </mat-grid-tile>
-                        <mat-grid-tile [colspan]= "4" [rowspan]="1">
-                            <div>
-                                <ngx-barcode6 [bc-height]="100" [bc-format]="'CODE128'" [bc-value]="printpartsupl"
-                                    [bc-display-value]="false">
-                                </ngx-barcode6>
-                            </div>
-                        </mat-grid-tile>
-                    </mat-grid-list>
-                   <!--  <p> PART SUPL (V) #</p>
+        </td>
+        <td style="vertical-align: top" colspan="2">
+          <p style="font-size: 0.5em">PART NUMBER DESCRIPTION</p>
+          <p style="width: 80%">
+            {{ printdescription }}
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align: top" colspan="2">
+          <mat-grid-list cols="4" rowHeight="50px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+              <p style="font-size: 0.5em; text-align: left">
+                PART # <br />
+                SUPL (V)
+              </p>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="3" [rowspan]="1">
+              <p style="font-size: 1.5em">
+                {{ lprintpartsupl }}
+              </p>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+              <div>
+                <ngx-barcode6
+                  [bc-height]="100"
+                  [bc-format]="'CODE128'"
+                  [bc-value]="printpartsupl"
+                  [bc-display-value]="false"
+                >
+                </ngx-barcode6>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+          <!--  <p> PART SUPL (V) #</p>
                     <p>
                         {{printpartsupl}}
                     </p>
@@ -188,53 +205,58 @@
                             [bc-display-value]="false">
                         </ngx-barcode6>
                     </div> -->
+        </td>
 
-                </td>
-
-                <td style="vertical-align:top;">
-                   <p style="font-size: .5em;text-align: left;">
-                    CHANGE <br> LETTER
-                   </p> 
-                </td>
-<!--                 <TD>
+        <td style="vertical-align: top">
+          <p style="font-size: 0.5em; text-align: left">
+            CHANGE <br />
+            LETTER
+          </p>
+        </td>
+        <!--                 <TD>
 
                 </TD> -->
-                <TD style="vertical-align:top;">
-                  <p style="font-size: .5em;text-align: left;">
-                    DATE <br> MFG
-                    <br /> 
-                    <br />
-                    {{printdatemfg | date: 'dd/MM/yyyy'}}
-                 </p>  
-                </TD>
+        <TD style="vertical-align: top">
+          <p style="font-size: 0.5em; text-align: left">
+            DATE <br />
+            MFG
+            <br />
+            <br />
+            {{ printdatemfg | date : "dd/MM/yyyy" }}
+          </p>
+        </TD>
+      </tr>
+      <tr></tr>
+      <tr>
+        <td style="vertical-align: top" colspan="2">
+          <mat-grid-list cols="4" rowHeight="50px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+              <p style="font-size: 0.5em; text-align: left">
+                SERIAL # <br />
+                (3S)
+              </p>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="3" [rowspan]="1">
+              <p style="font-size: 1.5em">
+                {{ lprintserial }}
+              </p>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+              <div>
+                <div style="margin-top: -10%">
+                  <ngx-barcode6
+                    [bc-height]="65"
+                    [bc-format]="'CODE128'"
+                    [bc-value]="printserial"
+                    [bc-display-value]="false"
+                  >
+                  </ngx-barcode6>
+                </div>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
 
-            </tr>
-            <tr>
-
-            </tr>
-            <tr>
-                <td style="vertical-align:top;" colspan="2">
-                    <mat-grid-list cols="4" rowHeight="50px">
-                        <mat-grid-tile [colspan]= "1" [rowspan]="1">
-                            <p style="font-size: .5em;text-align: left;"> SERIAL # <br> (3S) </p>
-                        </mat-grid-tile>
-                        <mat-grid-tile [colspan]= "3" [rowspan]="1">
-                            <p style="font-size: 1.5em;">
-                                {{lprintserial}}
-                            </p>
-                        </mat-grid-tile>
-                        <mat-grid-tile [colspan]= "4" [rowspan]="1">
-                            <div>
-                                <div style="margin-top: -10%;">
-                                    <ngx-barcode6 [bc-height]="65" [bc-format]="'CODE128'" [bc-value]="printserial"
-                                        [bc-display-value]="false">
-                                    </ngx-barcode6>
-                                </div>
-                            </div>
-                        </mat-grid-tile>
-                    </mat-grid-list>
-
-<!--                     <p> SERIAL # (3S) </p>
+          <!--                     <p> SERIAL # (3S) </p>
                     <p>
                         {{printserial}}
                     </p>
@@ -244,24 +266,13 @@
                             [bc-display-value]="false">
                         </ngx-barcode6>
                     </div> -->
+        </td>
 
+        <td style="vertical-align: top; font-size: 0.5em">DOCK <BR />LOC</td>
+        <td style="vertical-align: top; font-size: 0.5em">DROP <BR />ZONE</td>
+      </tr>
+    </table>
 
-                </td>
-
-                <td style="vertical-align:top; font-size: .5em">
-                    DOCK <BR />LOC
-                </td>
-                <td style="vertical-align:top; font-size: .5em">
-                    DROP <BR />ZONE
-                </td>
-            </tr>
-        </table>
-
-        <!--Your html stuff that you want to print-->
-    </div>
-
-
-
-
-
+    <!--Your html stuff that you want to print-->
+  </div>
 </section>

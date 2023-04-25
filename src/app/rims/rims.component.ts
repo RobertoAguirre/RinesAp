@@ -10,14 +10,14 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-rims',
   templateUrl: './rims.component.html',
-  styleUrls: ['./rims.component.css']
+  styleUrls: ['./rims.component.css'],
 })
 export class RimsComponent implements OnInit {
   tiles: any[] = [
-    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
+    { text: 'One', cols: 3, rows: 1, color: 'lightblue' },
+    { text: 'Two', cols: 1, rows: 2, color: 'lightgreen' },
+    { text: 'Three', cols: 1, rows: 1, color: 'lightpink' },
+    { text: 'Four', cols: 2, rows: 1, color: '#DDBDF1' },
   ];
   @ViewChild('printcontainer') printableElement: ElementRef; //referencia a la tabla a exportar
 
@@ -25,7 +25,6 @@ export class RimsComponent implements OnInit {
   role;
   username;
   admin;
-
 
   imagesUrl = environment.STATIC_FILES_URL;
   public rims = [];
@@ -44,49 +43,62 @@ export class RimsComponent implements OnInit {
   lprintserial;
 
   @ViewChild('printbtn', { static: false }) printbtn: ElementRef;
-  constructor(private exportService: ExportService, private rim: RimsService, public dialog: MatDialog, private brand: BrandsService, private router: Router) {
-
-  }
+  constructor(
+    private exportService: ExportService,
+    private rim: RimsService,
+    public dialog: MatDialog,
+    private brand: BrandsService,
+    private router: Router
+  ) {}
 
   public config = {
     printMode: 'template-popup', // template
-    popupProperties: 'toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,fullscreen=yes',
+    popupProperties:
+      'toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,fullscreen=yes',
     pageTitle: 'Hello World',
-    templateString: '<header>I\'m part of the template header</header>{{printBody}}<footer>I\'m part of the template footer</footer>',
-    stylesheets: [{ rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' }],
-    styles: ['td { border: 1px solid black; color: green; }', 'table { border: 1px solid black; color: red }', 'header, table, footer { margin: auto; text-align: center; }']
-  }
+    templateString:
+      "<header>I'm part of the template header</header>{{printBody}}<footer>I'm part of the template footer</footer>",
+    stylesheets: [
+      {
+        rel: 'stylesheet',
+        href: 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+      },
+    ],
+    styles: [
+      'td { border: 1px solid black; color: green; }',
+      'table { border: 1px solid black; color: red }',
+      'header, table, footer { margin: auto; text-align: center; }',
+    ],
+  };
 
   ngOnInit(): void {
-
     this.currentBrand = localStorage.getItem('currentBrand');
     this.getStoredVariables();
     this.getRimsByBrand();
-
-
-
   }
 
   exportarPdf(item) {
     this.lprintSKU = item.sku;
     this.lprintqty = item.qty;
     this.lprintpartsupl = item.partsupl;
-/*     this.printdescription = item.description;
+    /*     this.printdescription = item.description;
     this.printdatemfg = item.datemfg; */
     this.lprintserial = item.serial;
-    this.printSKU = "P" + item.sku;
-    this.printqty = "Q" + item.qty;
-    this.printpartsupl = "P" + item.partsupl;
+    this.printSKU = 'P' + item.sku;
+    this.printqty = 'Q' + item.qty;
+    this.printpartsupl = 'P' + item.partsupl;
     this.printdescription = item.description;
     this.printdatemfg = item.datemfg;
-    this.printserial = "3S" + item.serial;
-    
+    this.printserial = '3S' + item.serial;
 
-    setTimeout(() => {                           // <<<---using ()=> syntax
-      this.exportService.exportToPdf(this.printableElement, 'user_data',item.labelColor);
+    setTimeout(() => {
+      // <<<---using ()=> syntax
+      this.exportService.exportToPdf(
+        this.printableElement,
+        'user_data',
+        item.labelColor
+      );
     }, 1000);
-
-
   }
 
   getStoredVariables() {
@@ -101,73 +113,67 @@ export class RimsComponent implements OnInit {
   }
 
   triggerPrint(item) {
-
-    this.printSKU = "P" + item.sku;
-    this.printqty = "Q" + item.qty;
-    this.printpartsupl = "P" + item.partsupl;
+    this.printSKU = 'P' + item.sku;
+    this.printqty = 'Q' + item.qty;
+    this.printpartsupl = 'P' + item.partsupl;
     this.printdescription = item.description;
     this.printdatemfg = item.datemfg;
-    this.printserial = "3S" + item.serial;
+    this.printserial = '3S' + item.serial;
 
-    setTimeout(() => {                           // <<<---using ()=> syntax
+    setTimeout(() => {
+      // <<<---using ()=> syntax
       console.log(this.printbtn);
       this.printbtn.nativeElement.click();
     }, 1000);
-
 
     /*   this.printbtn.nativeElement.on('click',()=>{ 
         alert("test"); 
       }); */
   }
+
+  sortRims(rims: any[]): any[] {
+    return rims.sort((a, b) => {
+      if (a.favorite && !b.favorite) {
+        return -1;
+      } else if (!a.favorite && b.favorite) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
   getRimsByBrand() {
     this.rim.getAllByBrand(this.currentBrand).subscribe((response) => {
       let _response;
       _response = response;
-      this.rims = _response.results;
+      this.rims = this.sortRims(_response.results);
       /* alert(_response.results[0].modelname); */
-    })
+    });
   }
 
   deleteRim(rim) {
-
-
     Swal.fire({
       title: 'Esta a punto de eliminar un modelo, ¿esta seguro?',
       text: 'Esta operación no se puede deshacer',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, eliminar modelo',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.value) {
         this.rim.delete(rim).subscribe((response) => {
           let _response;
           _response = response;
-          Swal.fire(
-            'Eliminado!',
-            'El modelo ha sido eliminado.',
-            'success'
-          )
+          Swal.fire('Eliminado!', 'El modelo ha sido eliminado.', 'success');
           this.getRimsByBrand();
+        });
 
-        })
-
-        Swal.fire(
-          'Eliminado!',
-          'El modelo ha sido eliminados.',
-          'success'
-        )
+        Swal.fire('Eliminado!', 'El modelo ha sido eliminados.', 'success');
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-
       }
-    })
-
-
-
-
-
+    });
   }
-
 
   openDialog(comp) {
     //localStorage.setItem('currentBrand',this.currentBrand);
@@ -175,11 +181,11 @@ export class RimsComponent implements OnInit {
       /*       width: '330px',
             height: '400px', */
       data: {
-        componentToShow: comp
-      }
+        componentToShow: comp,
+      },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
       this.getRimsByBrand();
     });
@@ -189,5 +195,4 @@ export class RimsComponent implements OnInit {
     localStorage.clear();
     this.router.navigateByUrl('/login');
   }
-
 }

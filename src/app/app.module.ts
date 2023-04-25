@@ -2,10 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxPrintModule } from 'ngx-print'; //old 
-
-
-
+import { NgxPrintModule } from 'ngx-print'; //old
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { NgxBarcode6Module } from 'ngx-barcode6';
 
@@ -35,11 +32,10 @@ import { AuthModule } from './auth/auth.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NewuserComponent } from './newuser/newuser.component';
 import { UsersComponent } from './users/users.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-
-
+import { MatTableModule } from '@angular/material/table';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -52,7 +48,7 @@ import {MatNativeDateModule} from '@angular/material/core';
     RimsComponent,
     GreenprintComponent,
     NewuserComponent,
-    UsersComponent
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,26 +63,26 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatInputModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatSlideToggleModule,
     MatToolbarModule,
     MatGridListModule,
     MatCardModule,
     MatDialogModule,
     MatSelectModule,
     MatTableModule,
+    MatCheckboxModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  exports: [
-    MatGridListModule,
-  ],
+  exports: [MatGridListModule],
 
   providers: [
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:AuthInterceptor,
-      multi:true
-    }
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

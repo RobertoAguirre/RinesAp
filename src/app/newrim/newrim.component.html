@@ -1,42 +1,48 @@
 <h1>Nuevo modelo</h1>
 
 <div class="form-group">
-    <form [formGroup]="newrimForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="newrimForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width">
+      <mat-label for="sku">Part Cust (P): </mat-label>
+      <input matInput="" id="sku" type="text" formControlName="sku" />
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <mat-label for="sku">Part Cust (P): </mat-label>
-            <input matInput="" id="sku" type="text" formControlName="sku">
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <label for="modelname">Modelo: </label>
+      <input
+        matInput=""
+        id="modelname"
+        type="text"
+        formControlName="modelname"
+      />
+    </mat-form-field>
 
+    <mat-form-field class="example-full-width">
+      <label for="description">Descripción: </label>
+      <input
+        matInput=""
+        id="description"
+        type="text"
+        formControlName="description"
+      />
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <label for="modelname">Modelo: </label>
-            <input matInput="" id="modelname" type="text" formControlName="modelname">
+    <mat-form-field class="example-full-width">
+      <label for="partsupl">PartSupl: </label>
+      <input matInput="" id="partsupl" type="text" formControlName="partsupl" />
+    </mat-form-field>
 
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <label for="serial">Serial: </label>
+      <input matInput="" id="serial" type="text" formControlName="serial" />
+    </mat-form-field>
 
-
-        <mat-form-field class="example-full-width">
-            <label for="description">Descripción: </label>
-            <input matInput="" id="description" type="text" formControlName="description">
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-            <label for="partsupl">PartSupl: </label>
-            <input matInput="" id="partsupl" type="text" formControlName="partsupl">
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-            <label for="serial">Serial: </label>
-            <input matInput="" id="serial" type="text" formControlName="serial">
-        </mat-form-field>
-
-        <!-- <mat-form-field class="example-full-width">
+    <!-- <mat-form-field class="example-full-width">
             <label for="datemfg">Fecha de fabricación: </label>
             <input matInput="" id="datemfg" type="date" formControlName="datemfg">
         </mat-form-field> -->
 
-        <!-- <mat-form-field appearance="fill" class="example-full-width">
+    <!-- <mat-form-field appearance="fill" class="example-full-width">
             <mat-label for="datemfg">Fecha de fabricación:</mat-label>
             <input matInput id="datemfg" type="date" formControlName="datemfg" [matDatepicker]="picker">
             <mat-hint>MM/DD/YYYY</mat-hint>
@@ -44,47 +50,59 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field> -->
 
-          <mat-form-field  class="example-full-width">
-            <mat-label>Fecha de fabricación:</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="datemfg">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          
-          
+    <mat-form-field class="example-full-width">
+      <mat-label>Fecha de fabricación:</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="datemfg" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <label for="qty">Cantidad: </label>
-            <input matInput="" id="qty" type="text" formControlName="qty">
-        </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <label for="qty">Cantidad: </label>
+      <input matInput="" id="qty" type="text" formControlName="qty" />
+    </mat-form-field>
 
+    <mat-form-field class="example-full-width">
+      <label for="brand">Marca: </label>
+      <input
+        readonly="true"
+        matInput=""
+        id="brand"
+        type="text"
+        formControlName="brand"
+      />
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <label for="brand">Marca: </label>
-            <input readonly="true" matInput="" id="brand" type="text" formControlName="brand">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Etiqueta</mat-label>
+      <mat-select formControlName="labelColor">
+        <mat-option [value]="'ORANGE'"> Naranja </mat-option>
+        <mat-option [value]="'GREEN'"> Verde </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-        </mat-form-field>
+    <mat-label>Favorito</mat-label>
 
-        <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Etiqueta</mat-label>
-            <mat-select formControlName="labelColor">
-                <mat-option [value]="'ORANGE'">
-                    Naranja
-                </mat-option>
-                <mat-option [value]="'GREEN'">
-                    Verde
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+    <mat-slide-toggle
+      style="margin-left: 2em"
+      formControlName="favorite"
+    ></mat-slide-toggle>
+    <br />
+    <br />
 
-        <br />
+    <input
+      type="file"
+      name="photo"
+      class="file-input"
+      (change)="onFileSelected($event)"
+      #fileUpload
+    />
 
-
-
-        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
-
-        <!--         <div class="file-upload">
+    <!--         <div class="file-upload">
 
             {{fileName || "Elegir imagen"}}
 
@@ -94,14 +112,16 @@
         </div>
  -->
 
-
-
-        <div class="form-control">
-            <br />
-            <button [disabled]="!newrimForm.valid" mat-raised-button color="accent" type="submit">Guardar</button>
-        </div>
-
-
-    </form>
-
+    <div class="form-control">
+      <br />
+      <button
+        [disabled]="!newrimForm.valid"
+        mat-raised-button
+        color="accent"
+        type="submit"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
 </div>

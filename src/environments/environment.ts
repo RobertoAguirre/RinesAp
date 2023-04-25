@@ -6,10 +6,11 @@ export const environment = {
   production: false,
   /* SERVER_URL : "http://74.208.145.99:3000/api/v1",
   STATIC_FILES_URL:"http://74.208.145.99:3000/img/" */
-  SERVER_URL : "http://localhost:3000/api/v1",
-  STATIC_FILES_URL:"http://localhost:3000/img/"
+  /* SERVER_URL : "http://localhost:3000/api/v1",
+  STATIC_FILES_URL:"http://localhost:3000/img/" */
+  SERVER_URL: 'http://192.168.2.37:3000/api/v1',
+  STATIC_FILES_URL: 'http://192.168.2.37:3000/img/',
 };
-
 
 /*
  * For easier debugging in development mode, you can import the following file
