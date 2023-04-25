@@ -53,7 +53,7 @@
     <mat-form-field class="example-full-width">
       <mat-label>Fecha de fabricación:</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="datemfg" />
-      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle
         matIconSuffix
         [for]="picker"
@@ -63,7 +63,7 @@
 
     <mat-form-field class="example-full-width">
       <label for="qty">Cantidad: </label>
-      <input matInput="" id="qty" type="text" formControlName="qty" />
+      <input matInput="" id="qty" type="number" formControlName="qty" />
     </mat-form-field>
 
     <mat-form-field class="example-full-width">

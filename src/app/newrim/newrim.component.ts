@@ -44,8 +44,8 @@ export class NewrimComponent implements OnInit {
     datemfg: new FormControl('', [Validators.required]),
     qty: new FormControl('', [Validators.required]),
     brand: new FormControl(`${this.currentBrand}`),
-    labelColor: new FormControl(''),
-    photo: new FormControl(''),
+    labelColor: new FormControl('', [Validators.required]),
+    photo: new FormControl('', [Validators.required]),
     favorite: new FormControl(false),
   });
 
@@ -74,6 +74,7 @@ export class NewrimComponent implements OnInit {
       this.fileName = file.name;
 
       this.file = file;
+      this.newrimForm.get('photo').setValue(this.fileName); // Add this line to update the FormControl value
     }
   }
 
