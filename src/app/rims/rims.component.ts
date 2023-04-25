@@ -143,6 +143,24 @@ export class RimsComponent implements OnInit {
     });
   }
 
+  toggleFavorite(rim: any) {
+    rim.favorite = !rim.favorite;
+    this.updateRim(rim);
+    this.rims = this.sortRims(this.rims);
+    //this.getRimsByBrand();
+  }
+
+  updateRim(rim: any) {
+    this.rim.favoriteRim(rim).subscribe(
+      (response) => {
+        console.log('Rim updated successfully:', response);
+      },
+      (error) => {
+        console.error('Error updating rim:', error);
+      }
+    );
+  }
+
   getRimsByBrand() {
     this.rim.getAllByBrand(this.currentBrand).subscribe((response) => {
       let _response;
