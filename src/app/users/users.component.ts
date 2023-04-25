@@ -9,21 +9,25 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
-
   users = [];
   displayedColumns: string[] = ['username', 'role', 'actions'];
   dataSource = [];
 
-  constructor(public dialog: MatDialog, private user: UsersService, private router: Router) {
-
-  }
+  constructor(
+    public dialog: MatDialog,
+    private user: UsersService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.getAllUsers();
   }
 
+  goToHomePage() {
+    this.router.navigate(['/home']); // Replace the '/' with your home route path if it's different
+  }
   getAllUsers() {
     this.user.getAll().subscribe((response) => {
       let _response;
@@ -31,7 +35,7 @@ export class UsersComponent implements OnInit {
       this.users = _response.results;
       this.dataSource = _response.results;
       /* alert(_response.results[0].modelname); */
-    })
+    });
   }
 
   logout() {
@@ -44,11 +48,11 @@ export class UsersComponent implements OnInit {
       /*       width: '330px',
             height: '400px', */
       data: {
-        componentToShow: comp
-      }
+        componentToShow: comp,
+      },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
       this.user.getAll().subscribe((response) => {
         let _response;
@@ -56,45 +60,37 @@ export class UsersComponent implements OnInit {
         this.users = _response.results;
         this.dataSource = _response.results;
         /* alert(_response.results[0].modelname); */
-      })
+      });
     });
   }
 
   delete(data) {
-
-
     Swal.fire({
       title: 'Esta a punto de eliminar un usuario, ¿esta seguro?',
       text: 'Esta operación no se puede deshacer',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, eliminar usuario',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.value) {
         this.user.delete(data).subscribe((response) => {
           let _response;
           _response = response;
-         
+
           this.user.getAll().subscribe((response) => {
             let _response;
             _response = response;
             this.users = _response.results;
             this.dataSource = _response.results;
             /* alert(_response.results[0].modelname); */
-          })
+          });
           /* alert(_response.results[0].modelname); */
         });
 
-        Swal.fire(
-          'Eliminado!',
-          'El usuario ha sido eliminados.',
-          'success'
-        )
+        Swal.fire('Eliminado!', 'El usuario ha sido eliminados.', 'success');
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-
       }
-    })
-
+    });
   }
 }

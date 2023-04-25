@@ -17,7 +17,17 @@
   </button>
 </mat-toolbar>
 <section>
-  <div *ngIf="admin" style="margin-left: 2em; margin-top: 1em">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="goToHomePage()"
+    style="margin-left: 1em; margin-top: 1em"
+  >
+    <mat-icon>arrow_back</mat-icon>
+    Regresar a marcas
+  </button>
+
+  <div *ngIf="admin" style="margin-left: 1em; margin-top: 1em">
     <button
       mat-raised-button
       (click)="openDialog('rims')"

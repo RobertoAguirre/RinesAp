@@ -77,6 +77,10 @@ export class RimsComponent implements OnInit {
     this.getRimsByBrand();
   }
 
+  goToHomePage() {
+    this.router.navigate(['/home']); // Replace the '/' with your home route path if it's different
+  }
+
   exportarPdf(item) {
     this.lprintSKU = item.sku;
     this.lprintqty = item.qty;

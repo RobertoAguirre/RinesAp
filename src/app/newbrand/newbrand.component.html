@@ -1,17 +1,20 @@
 <h1>Nueva marca</h1>
 
 <div class="form-group">
-    <form [formGroup]="newbrandForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="newbrandForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width">
+      <mat-label for="brand">Marca: </mat-label>
+      <input matInput="" id="brand" type="text" formControlName="brand" />
+    </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <mat-label for="brand">Marca: </mat-label>
-            <input matInput="" id="brand" type="text" formControlName="brand">
-        </mat-form-field>
+    <input
+      type="file"
+      class="file-input"
+      (change)="onFileSelected($event)"
+      #fileUpload
+    />
 
-
-        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
-
-<!--         <div class="file-upload">
+    <!--         <div class="file-upload">
 
             {{fileName || "No file uploaded yet."}}
 
@@ -20,14 +23,16 @@
             </button>
         </div> -->
 
-
-
-        <div class="form-control">
-            <br/>
-            <button mat-raised-button color="accent" type="submit">Guardar</button>
-        </div>
-
-
-    </form>
-
+    <div class="form-control">
+      <br />
+      <button
+        [disabled]="!newbrandForm.valid"
+        mat-raised-button
+        color="accent"
+        type="submit"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
 </div>
